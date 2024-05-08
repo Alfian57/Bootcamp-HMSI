@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,13 +10,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Pembelian extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $primaryKey = 'id_pembelian';
 
     protected $table = 'pembelian';
 
-    protected $guarded = 'id_pembelian';
+    protected $guarded = ['id_pembelian'];
 
     public function user(): BelongsTo
     {

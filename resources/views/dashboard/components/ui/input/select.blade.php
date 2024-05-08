@@ -1,14 +1,24 @@
-{{-- <div class="form-group mb-3">
-    <label class="form-group-text" for="{{ $name }}">{{ $label }}</label>
+@props(['label', 'options', 'selected'])
 
-    <select class="form-select" id="{{ $name }}" name="{{ $name }}">
+@php
+    $id = Str::uuid();
+    $name = $attributes->get('name');
+@endphp
+
+<div class="form-group mb-3">
+    <label class="form-group-text" for="{{ $id }}">{{ $label }}</label>
+
+    <select {{ $attributes->class('form-select ' . ($errors->has($name) ? ' is-invalid' : '')) }}
+        id="{{ $id }}">
+
         @foreach ($options as $key => $value)
-            <option value="{{ $key }}" @selected($selected == $key)>{{ $value }}</option>
+            <option value="{{ $key }}" @if ($selected == $key) selected @endif>{{ $value }}
+            </option>
         @endforeach
+
     </select>
 
     @error($name)
         <small class="form-text text-danger">{{ $message }}</small>
     @enderror
-</div> --}}
-<p class="text-danger">Select Belum Jadi</p>
+</div>

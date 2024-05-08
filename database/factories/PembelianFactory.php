@@ -26,7 +26,7 @@ class PembelianFactory extends Factory
                 StatusPembelian::SUDAH_BAYAR->value,
                 StatusPembelian::SEDANG_DIKIRIM->value,
                 StatusPembelian::SELESAI->value,
-                StatusPembelian::BATAL->value
+                StatusPembelian::BATAL->value,
             ]),
             'id_user' => $this->faker->randomElement(\App\Models\User::pluck('id_user')->where('is_admin', false)->toArray()),
         ];

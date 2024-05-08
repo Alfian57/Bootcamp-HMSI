@@ -1,6 +1,8 @@
-@extends('dashboard.layouts.main')
+@section('title')
+    Kelola Produk
+@endsection
 
-@section('content')
+<x-dashboard-layouts::main>
     <x-dashboard::shared.page-container title="Produk">
         <div class="d-flex justify-content-end mb-5">
             <x-dashboard::ui.button href="{{ route('dashboard.produk.create') }}">
@@ -11,4 +13,4 @@
         <livewire:produk-table />
 
     </x-dashboard::shared.page-container>
-@endsection
+</x-dashboard-layouts::main>

@@ -1,6 +1,13 @@
-@extends('dashboard.layouts.main')
+@section('title')
+    Dashbord
+@endsection
 
-@section('content')
+@push('scripts')
+    <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('assets/static/js/pages/dashboard.js') }}"></script>
+@endpush
+
+<x-dashboard-layouts::main>
     <x-dashboard::shared.page-container title="Dashboard">
         <div class="col-12">
             <div class="row">
@@ -15,9 +22,4 @@
             </div>
         </div>
     </x-dashboard::shared.page-container>
-@endsection
-
-@push('scripts')
-    <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/static/js/pages/dashboard.js') }}"></script>
-@endpush
+</x-dashboard-layouts::main>

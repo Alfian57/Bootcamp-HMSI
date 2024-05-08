@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<x-dashboard::shared.head :title="$title" />
+<x-dashboard::shared.head />
 
 @livewireStyles
 
 <body>
     @include('sweetalert::alert')
+
     <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
 
     <div id="app">
@@ -16,7 +17,7 @@
         <div id="main">
             <x-dashboard::shared.top-bar />
 
-            @yield('content')
+            {{ $slot }}
 
             <x-dashboard::shared.footer />
         </div>

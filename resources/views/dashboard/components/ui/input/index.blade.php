@@ -1,8 +1,15 @@
+@props(['label', 'id'])
+
+@php
+    $id = $id ?? Str::uuid();
+    $name = $attributes->get('name');
+@endphp
+
 <div class="form-group">
-    <label for="{{ $name }}">{{ $label }}</label>
-    <input type="{{ $type ?? 'text' }}" id="{{ $name }}" name="{{ $name }}"
-        class="form-control @error($name) is-invalid @enderror" placeholder="{{ $placeholder ?? '' }}"
-        @disabled(isset($disabled))>
+    <label for="{{ $id }}">{{ $label }}</label>
+    <input
+        {{ $attributes->class('form-control ' . ($errors->has($name) ? ' is-invalid' : ''))->merge(['type' => 'text']) }}
+        id="{{ $id }}">
     @error($name)
         <small class="form-text text-danger">{{ $message }}</small>
     @enderror

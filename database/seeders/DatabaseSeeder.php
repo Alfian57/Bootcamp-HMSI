@@ -5,9 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Enums\Gender;
-use App\Models\Item;
 use App\Models\Pembelian;
-use App\Models\Produk;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;

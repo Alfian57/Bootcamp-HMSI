@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produk', function (Blueprint $table) {
-            $table->id('id_produk');
+            $table->uuid('id_produk')->primary();
             $table->string('nama_produk');
-            $table->string('deskripsi_produk');
-            $table->unsignedInteger('harga_produk');
+            $table->text('deskripsi_produk');
+            $table->unsignedBigInteger('harga_produk');
             $table->enum('kategori_produk', ['elektronik', 'komputer']);
             $table->unsignedSmallInteger('berat_produk');
             $table->unsignedSmallInteger('stok_produk');

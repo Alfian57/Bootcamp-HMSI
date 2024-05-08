@@ -24,13 +24,13 @@ class StoreProdukRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nama_produk" => ['required', 'string', 'max:255'],
-            "deskripsi_produk" => ['required', 'string', 'max:255'],
-            "harga_produk" => ['required', 'integer'],
-            "kategori_produk" => ['required', Rule::in([KategoriProduk::ELEKTRONIK->value, KategoriProduk::KOMPUTER->value])],
-            "berat_produk" => ['required', 'integer'],
-            "stok_produk" => ['required', 'integer'],
-            "gambar_produk" => ['image'],
+            'nama_produk' => ['required', 'string', 'max:255'],
+            'deskripsi_produk' => ['required', 'string'],
+            'harga_produk' => ['required', 'integer'],
+            'kategori_produk' => ['required', Rule::in([KategoriProduk::ELEKTRONIK->value, KategoriProduk::KOMPUTER->value])],
+            'berat_produk' => ['required', 'integer'],
+            'stok_produk' => ['required', 'integer'],
+            'gambar_produk' => ['image'],
         ];
     }
 }
