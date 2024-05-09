@@ -11,7 +11,7 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 
-class ProdukTable extends DataTableComponent
+class ProductsTable extends DataTableComponent
 {
     protected $model = Product::class;
 
@@ -31,7 +31,7 @@ class ProdukTable extends DataTableComponent
                     'placeholder' => 'Cari Produk',
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('products.name', 'like', '%' . $value . '%');
+                    $builder->where('products.name', 'like', '%'.$value.'%');
                 }),
 
             SelectFilter::make('Status Pembayaran', 'product_category')
@@ -62,7 +62,7 @@ class ProdukTable extends DataTableComponent
             Column::make('Harga', 'price')
                 ->sortable()
                 ->format(function ($value) {
-                    return 'Rp. ' . number_format($value, 2);
+                    return 'Rp. '.number_format($value, 2);
                 }),
 
             Column::make('Kategori', 'category')
@@ -74,7 +74,7 @@ class ProdukTable extends DataTableComponent
 
             ImageColumn::make('Gambar Produk', 'image')
                 ->location(
-                    fn ($row) => asset('storage/' . $row->image)
+                    fn ($row) => asset('storage/'.$row->image)
                 )
                 ->attributes(fn ($row) => [
                     'class' => 'text-danger font-weight-bold',

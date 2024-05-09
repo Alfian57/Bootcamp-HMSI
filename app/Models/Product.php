@@ -11,7 +11,7 @@ use Spatie\Sluggable\SlugOptions;
 
 class Product extends Model
 {
-    use HasFactory, HasUuids, HasSlug;
+    use HasFactory, HasSlug, HasUuids;
 
     protected $guarded = ['id'];
 

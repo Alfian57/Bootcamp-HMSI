@@ -8,7 +8,7 @@
         <form action="{{ route('dashboard.products.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <x-dashboard::ui.input type="text" label="Nama Produk" name="name" placeholder="Masukan nama produk"
-                value="{{ old('name') }}" required autofocus />
+                value="{{ old('name') }}" required />
 
             <x-dashboard::ui.input.text-area label="Deskripsi Produk" name="description"
                 placeholder="Masukan deskripsi produk" value="{{ old('description') }}" required />

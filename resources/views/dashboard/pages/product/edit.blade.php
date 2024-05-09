@@ -11,7 +11,7 @@
             @method('PUT')
 
             <x-dashboard::ui.input type="text" label="Nama Produk" name="name" placeholder="Masukan nama produk"
-                value="{{ old('name', $product->name) }}" required autofocus />
+                value="{{ old('name', $product->name) }}" required />
 
             <x-dashboard::ui.input.text-area label="Deskripsi Produk" name="description"
                 placeholder="Masukan deskripsi produk" value="{{ old('description', $product->description) }}"

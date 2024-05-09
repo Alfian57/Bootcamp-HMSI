@@ -1,16 +1,16 @@
 @section('title')
-    Kelola Produk
+    Kelola Pengguna
 @endsection
 
 <x-dashboard-layouts::main>
-    <x-dashboard::shared.page-container title="Produk">
+    <x-dashboard::shared.page-container title="Pengguna">
         <div class="d-flex justify-content-end mb-5">
-            <x-dashboard::ui.button href="{{ route('dashboard.products.create') }}">
-                Tambah Produk
+            <x-dashboard::ui.button href="{{ route('dashboard.users.create') }}">
+                Tambah Pengguna
             </x-dashboard::ui.button>
         </div>
 
-        <livewire:products-table />
+        <livewire:users-table />
 
     </x-dashboard::shared.page-container>
 </x-dashboard-layouts::main>
