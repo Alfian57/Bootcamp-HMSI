@@ -27,6 +27,7 @@ Route::middleware('auth')->prefix('dashboard')->as('dashboard.')->group(function
     Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
     Route::resource('products', ProductController::class);
-    Route::resource('purchases', PurchaseController::class);
     Route::resource('users', UserController::class);
+
+    Route::get('purchases', [PurchaseController::class, 'index'])->name('purchases.index');
 });

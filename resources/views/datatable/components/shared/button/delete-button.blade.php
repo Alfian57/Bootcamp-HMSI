@@ -3,7 +3,7 @@
         @csrf
         @method('DELETE')
         <div class="d-flex text-end">
-            <x-datatable::ui.button.index type="submit" class="btn-danger"
+            <x-datatable::ui.button.index type="submit" class="btn-danger btn-sm"
                 onclick="return confirmation(event, 'Apakah anda ingin menghapus data ini?')">
                 Hapus
             </x-datatable::ui.button.index>

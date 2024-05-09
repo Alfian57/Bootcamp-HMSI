@@ -20,7 +20,7 @@ class ProductsTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setSearchStatus(false);
         $this->setFiltersVisibilityStatus(false);
-        $this->setAdditionalSelects(['products.slug as slug', 'products.image as image']);
+        $this->setAdditionalSelects(['products.id as id', 'products.slug as slug', 'products.image as image']);
     }
 
     public function filters(): array
@@ -31,7 +31,7 @@ class ProductsTable extends DataTableComponent
                     'placeholder' => 'Cari Produk',
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('products.name', 'like', '%'.$value.'%');
+                    $builder->where('products.name', 'like', '%' . $value . '%');
                 }),
 
             SelectFilter::make('Status Pembayaran', 'product_category')
@@ -52,6 +52,17 @@ class ProductsTable extends DataTableComponent
             ->latest('products.created_at');
     }
 
+    public array $bulkActions = [
+        'deleteSelected' => 'Hapus',
+    ];
+
+
+
+    public function deleteSelected()
+    {
+        Product::whereIn('id', $this->getSelected())->delete();
+    }
+
     public function columns(): array
     {
         return [
@@ -61,26 +72,35 @@ class ProductsTable extends DataTableComponent
 
             Column::make('Harga', 'price')
                 ->sortable()
-                ->format(function ($value) {
-                    return 'Rp. '.number_format($value, 2);
-                }),
+                ->format(fn ($value) => 'Rp. ' . number_format($value, 2))
+                ->collapseOnMobile(),
 
             Column::make('Kategori', 'category')
                 ->sortable()
                 ->secondaryHeaderFilter('product_category')
-                ->attributes(fn ($value) => [
-                    'class' => 'text-capitilize font-weight-bold',
-                ]),
+                ->format(fn ($value) => $this->displayCategory($value))
+                ->collapseOnMobile(),
 
             ImageColumn::make('Gambar Produk', 'image')
                 ->location(
-                    fn ($row) => asset('storage/'.$row->image)
+                    fn ($row) => asset('storage/' . $row->image)
                 )
                 ->attributes(fn ($row) => [
                     'class' => 'text-danger font-weight-bold',
                     'alt' => 'Gambar rusak',
                     'style' => 'width: 50px;',
-                ]),
+                ])
+                ->collapseOnTablet(),
+
+            Column::make('Stok', 'stock')
+                ->collapseAlways(),
+
+            Column::make('Berat', 'weight')
+                ->format(fn ($value) => $value . ' kg')
+                ->collapseAlways(),
+
+            Column::make('Deksripsi', 'description')
+                ->collapseAlways(),
 
             Column::make('Aksi')
                 ->label(function ($row) {
@@ -88,8 +108,10 @@ class ProductsTable extends DataTableComponent
                         'href' => route('dashboard.products.destroy', $row->slug),
                     ]);
 
-                    $editButton = view('datatable.components.shared.button.edit-button', [
+                    $editButton = view('datatable.components.shared.button.action-button', [
                         'href' => route('dashboard.products.edit', $row->slug),
+                        'class' => 'btn-warning',
+                        'text' => 'Ubah'
                     ]);
 
                     return view('datatable.components.shared.action-container.index', [
@@ -97,5 +119,16 @@ class ProductsTable extends DataTableComponent
                     ]);
                 }),
         ];
+    }
+
+    private function displayCategory($value): string
+    {
+        if ($value == ProductCategory::ELECTRONIC->value) {
+            return 'Elektronik';
+        } elseif ($value == ProductCategory::COMPUTER->value) {
+            return 'Komputer';
+        }
+
+        return "";
     }
 }
