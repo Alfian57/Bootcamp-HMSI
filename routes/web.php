@@ -26,8 +26,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->prefix('dashboard')->as('dashboard.')->group(function () {
     Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
-    Route::resource('products', ProductController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('products', ProductController::class)->except('show');
+
+    Route::resource('users', UserController::class)->except('show');
 
     Route::get('purchases', [PurchaseController::class, 'index'])->name('purchases.index');
+    Route::get('purchases/{purchase}', [PurchaseController::class, 'show'])->name('purchases.show');
+    Route::get('purchases/{purchase}/export', [PurchaseController::class, 'export'])->name('purchases.export');
 });

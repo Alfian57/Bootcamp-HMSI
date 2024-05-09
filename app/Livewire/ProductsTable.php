@@ -3,8 +3,11 @@
 namespace App\Livewire;
 
 use App\Enums\ProductCategory;
+use App\Exports\ProductsExport;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
@@ -31,7 +34,7 @@ class ProductsTable extends DataTableComponent
                     'placeholder' => 'Cari Produk',
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('products.name', 'like', '%' . $value . '%');
+                    $builder->where('products.name', 'like', '%'.$value.'%');
                 }),
 
             SelectFilter::make('Status Pembayaran', 'product_category')
@@ -54,13 +57,25 @@ class ProductsTable extends DataTableComponent
 
     public array $bulkActions = [
         'deleteSelected' => 'Hapus',
+        'exportSelected' => 'Ekspor Excel',
     ];
-
-
 
     public function deleteSelected()
     {
+        Product::whereIn('id', $this->getSelected())->get()->each(function ($product) {
+            if ($product->image) {
+                Storage::delete($product->image);
+            }
+        });
+
         Product::whereIn('id', $this->getSelected())->delete();
+    }
+
+    public function exportSelected()
+    {
+        $fileName = 'products_'.date('Y-m-d_H-i-s').'.xlsx';
+
+        return Excel::download(new ProductsExport($this->getSelected()), $fileName);
     }
 
     public function columns(): array
@@ -72,7 +87,7 @@ class ProductsTable extends DataTableComponent
 
             Column::make('Harga', 'price')
                 ->sortable()
-                ->format(fn ($value) => 'Rp. ' . number_format($value, 2))
+                ->format(fn ($value) => 'Rp. '.number_format($value, 2))
                 ->collapseOnMobile(),
 
             Column::make('Kategori', 'category')
@@ -83,7 +98,7 @@ class ProductsTable extends DataTableComponent
 
             ImageColumn::make('Gambar Produk', 'image')
                 ->location(
-                    fn ($row) => asset('storage/' . $row->image)
+                    fn ($row) => asset('storage/'.$row->image)
                 )
                 ->attributes(fn ($row) => [
                     'class' => 'text-danger font-weight-bold',
@@ -96,7 +111,7 @@ class ProductsTable extends DataTableComponent
                 ->collapseAlways(),
 
             Column::make('Berat', 'weight')
-                ->format(fn ($value) => $value . ' kg')
+                ->format(fn ($value) => $value.' kg')
                 ->collapseAlways(),
 
             Column::make('Deksripsi', 'description')
@@ -111,7 +126,7 @@ class ProductsTable extends DataTableComponent
                     $editButton = view('datatable.components.shared.button.action-button', [
                         'href' => route('dashboard.products.edit', $row->slug),
                         'class' => 'btn-warning',
-                        'text' => 'Ubah'
+                        'text' => 'Ubah',
                     ]);
 
                     return view('datatable.components.shared.action-container.index', [
@@ -129,6 +144,6 @@ class ProductsTable extends DataTableComponent
             return 'Komputer';
         }
 
-        return "";
+        return '';
     }
 }

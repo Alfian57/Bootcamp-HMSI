@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div class="d-flex gap-2">
     @foreach ($components as $component)
         {{ $component }}
     @endforeach

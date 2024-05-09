@@ -3,8 +3,11 @@
 namespace App\Livewire;
 
 use App\Enums\Gender;
+use App\Exports\UsersExport;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
@@ -32,7 +35,7 @@ class UsersTable extends DataTableComponent
                     'placeholder' => 'Cari Pengguna',
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('users.name', 'like', '%' . $value . '%');
+                    $builder->where('users.name', 'like', '%'.$value.'%');
                 }),
 
             TextFilter::make('Email Pengguna', 'user_email')
@@ -40,7 +43,7 @@ class UsersTable extends DataTableComponent
                     'placeholder' => 'Cari Email',
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('users.email', 'like', '%' . $value . '%');
+                    $builder->where('users.email', 'like', '%'.$value.'%');
                 }),
 
             SelectFilter::make('Jenis Kelamin', 'user_gender')
@@ -71,6 +74,29 @@ class UsersTable extends DataTableComponent
             ->latest('users.created_at');
     }
 
+    public array $bulkActions = [
+        'deleteSelected' => 'Hapus',
+        'exportSelected' => 'Ekspor Excel',
+    ];
+
+    public function deleteSelected()
+    {
+        User::whereIn('id', $this->getSelected())->get()->each(function ($user) {
+            if ($user->photo_profile) {
+                Storage::delete($user->photo_profile);
+            }
+        });
+
+        User::whereIn('id', $this->getSelected())->delete();
+    }
+
+    public function exportSelected()
+    {
+        $fileName = 'users_'.date('Y-m-d_H-i-s').'.xlsx';
+
+        return Excel::download(new UsersExport($this->getSelected()), $fileName);
+    }
+
     public function columns(): array
     {
         return [
@@ -91,7 +117,7 @@ class UsersTable extends DataTableComponent
 
             ImageColumn::make('Foto Profil', 'photo_profile')
                 ->location(
-                    fn ($row) => asset('storage/' . $row->photo_profile)
+                    fn ($row) => asset('storage/'.$row->photo_profile)
                 )
                 ->attributes(fn ($row) => [
                     'class' => 'text-danger font-weight-bold',
@@ -123,7 +149,7 @@ class UsersTable extends DataTableComponent
                     $editButton = view('datatable.components.shared.button.action-button', [
                         'href' => route('dashboard.users.edit', $row->id),
                         'class' => 'btn-warning',
-                        'text' => 'Ubah'
+                        'text' => 'Ubah',
                     ]);
 
                     return view('datatable.components.shared.action-container.index', [
@@ -141,6 +167,6 @@ class UsersTable extends DataTableComponent
             return 'Perempuan';
         }
 
-        return "";
+        return '';
     }
 }

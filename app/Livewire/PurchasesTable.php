@@ -31,7 +31,7 @@ class PurchasesTable extends DataTableComponent
                     'placeholder' => 'Cari Pengguna',
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('user.name', 'like', '%' . $value . '%');
+                    $builder->where('user.name', 'like', '%'.$value.'%');
                 }),
 
             SelectFilter::make('Jenis Kelamin', 'purchase_status')
@@ -73,12 +73,12 @@ class PurchasesTable extends DataTableComponent
                 ->secondaryHeaderFilter('user_name'),
 
             Column::make('Total Harga', 'total_price')
-                ->format(fn ($value) => 'Rp ' . number_format($value, 2))
+                ->format(fn ($value) => 'Rp '.number_format($value, 2))
                 ->sortable()
                 ->collapseOnTablet(),
 
             Column::make('Total Berat', 'total_weight')
-                ->format(fn ($value) => $value . ' kg')
+                ->format(fn ($value) => $value.' kg')
                 ->sortable()
                 ->collapseOnTablet(),
 
@@ -95,13 +95,19 @@ class PurchasesTable extends DataTableComponent
             Column::make('Aksi')
                 ->label(function ($row) {
                     $detailButton = view('datatable.components.shared.button.action-button', [
-                        'href' => route('dashboard.users.edit', $row->id),
+                        'href' => route('dashboard.purchases.show', $row->id),
                         'class' => 'btn-primary',
-                        'text' => 'Detail'
+                        'text' => 'Detail',
+                    ]);
+
+                    $exportButton = view('datatable.components.shared.button.action-button', [
+                        'href' => route('dashboard.purchases.export', $row->id),
+                        'class' => 'btn-secondary',
+                        'text' => 'Ekspor Excel',
                     ]);
 
                     return view('datatable.components.shared.action-container.index', [
-                        'components' => [$detailButton],
+                        'components' => [$detailButton, $exportButton],
                     ]);
                 }),
         ];
@@ -111,16 +117,16 @@ class PurchasesTable extends DataTableComponent
     {
         if ($value == PurchaceStatus::UNPAID->value) {
             return 'Belum Dibayar';
-        } else if ($value == PurchaceStatus::PAID->value) {
+        } elseif ($value == PurchaceStatus::PAID->value) {
             return 'Sudah Dibayar';
-        } else if ($value == PurchaceStatus::BEING_SHIPPED->value) {
+        } elseif ($value == PurchaceStatus::BEING_SHIPPED->value) {
             return 'Sedang Dikirim';
-        } else if ($value == PurchaceStatus::COMPLETED->value) {
+        } elseif ($value == PurchaceStatus::COMPLETED->value) {
             return 'Selesai';
-        } else if ($value == PurchaceStatus::CANCELLED->value) {
+        } elseif ($value == PurchaceStatus::CANCELLED->value) {
             return 'Dibatalkan';
         } else {
-            return "";
+            return '';
         }
     }
 }
