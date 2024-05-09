@@ -16,7 +16,7 @@
                     </x-slot>
                 </x-dashboard::shared.sidebar.menu>
 
-                <x-dashboard::shared.sidebar.menu href="{{ route('dashboard.produk.index') }}">
+                <x-dashboard::shared.sidebar.menu href="{{ route('dashboard.products.index') }}">
                     <x-slot name="icon">
                         <i class="bi bi-grid-fill"></i>
                     </x-slot>
@@ -26,7 +26,7 @@
                     </x-slot>
                 </x-dashboard::shared.sidebar.menu>
 
-                <x-dashboard::shared.sidebar.menu href="{{ route('dashboard.pembelian.index') }}">
+                <x-dashboard::shared.sidebar.menu href="{{ route('dashboard.purchases.index') }}">
                     <x-slot name="icon">
                         <i class="bi bi-grid-fill"></i>
                     </x-slot>
@@ -36,7 +36,7 @@
                     </x-slot>
                 </x-dashboard::shared.sidebar.menu>
 
-                <x-dashboard::shared.sidebar.menu href="{{ route('dashboard.pembelian.index') }}">
+                <x-dashboard::shared.sidebar.menu href="{{ route('dashboard.users.index') }}">
                     <x-slot name="icon">
                         <i class="bi bi-grid-fill"></i>
                     </x-slot>

@@ -18,14 +18,14 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_lengkap' => $this->faker->name(),
+            'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'jenis_kelamin' => $this->faker->randomElement([Gender::MALE->value, Gender::FEMALE->value]),
-            'tanggal_lahir' => $this->faker->date(max: '2005-01-01'),
-            'no_telepon' => $this->faker->phoneNumber(),
-            'foto_profil' => null,
-            'is_active' => $this->faker->boolean(),
+            'gender' => $this->faker->randomElement([Gender::MALE->value, Gender::FEMALE->value]),
+            'date_of_birth' => $this->faker->date(max: '2005-01-01'),
+            'phone_number' => $this->faker->phoneNumber(),
+            'photo_profile' => null,
+            'is_active' => true,
             'is_admin' => $this->faker->boolean(),
             'last_login' => null,
         ];

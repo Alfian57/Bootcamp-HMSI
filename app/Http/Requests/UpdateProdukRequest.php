@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\KategoriProduk;
+use App\Enums\ProductCategory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,13 +24,13 @@ class UpdateProdukRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_produk' => ['required', 'string', 'max:255'],
-            'deskripsi_produk' => ['required', 'string'],
-            'harga_produk' => ['required', 'integer'],
-            'kategori_produk' => ['required', Rule::in([KategoriProduk::ELEKTRONIK->value, KategoriProduk::KOMPUTER->value])],
-            'berat_produk' => ['required', 'integer'],
-            'stok_produk' => ['required', 'integer'],
-            'gambar_produk' => ['image'],
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'price' => ['required', 'integer'],
+            'category' => ['required', Rule::in([ProductCategory::ELECTRONIC->value, ProductCategory::COMPUTER->value])],
+            'weight' => ['required', 'integer'],
+            'stock' => ['required', 'integer'],
+            'image' => ['image'],
         ];
     }
 }

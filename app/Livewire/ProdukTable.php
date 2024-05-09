@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Enums\KategoriProduk;
-use App\Models\Produk;
+use App\Enums\ProductCategory;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -13,83 +13,83 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 
 class ProdukTable extends DataTableComponent
 {
-    protected $model = Produk::class;
+    protected $model = Product::class;
 
     public function configure(): void
     {
         $this->setPrimaryKey('id');
         $this->setSearchStatus(false);
         $this->setFiltersVisibilityStatus(false);
-        $this->setAdditionalSelects(['produk.id_produk as id']);
+        $this->setAdditionalSelects(['products.slug as slug', 'products.image as image']);
     }
 
     public function filters(): array
     {
         return [
-            TextFilter::make('Nama Produk', 'nama_produk')
+            TextFilter::make('Nama Produk', 'product_name')
                 ->config([
                     'placeholder' => 'Cari Produk',
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('produk.nama_produk', 'like', '%'.$value.'%');
+                    $builder->where('products.name', 'like', '%' . $value . '%');
                 }),
 
-            SelectFilter::make('Status Pembayaran', 'kategori_produk')
+            SelectFilter::make('Status Pembayaran', 'product_category')
                 ->options([
                     '' => 'Pilih',
-                    KategoriProduk::ELEKTRONIK->value => 'Elektronik',
-                    KategoriProduk::KOMPUTER->value => 'Komputer',
+                    ProductCategory::ELECTRONIC->value => 'Elektronik',
+                    ProductCategory::COMPUTER->value => 'Komputer',
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('produk.kategori_produk', $value);
+                    $builder->where('products.category', $value);
                 }),
         ];
     }
 
     public function builder(): Builder
     {
-        return Produk::query()
-            ->latest('produk.created_at');
+        return Product::query()
+            ->latest('products.created_at');
     }
 
     public function columns(): array
     {
         return [
-            Column::make('Nama', 'nama_produk')
+            Column::make('Nama', 'name')
                 ->sortable()
-                ->secondaryHeaderFilter('nama_produk'),
+                ->secondaryHeaderFilter('product_name'),
 
-            Column::make('Harga', 'harga_produk')
+            Column::make('Harga', 'price')
                 ->sortable()
                 ->format(function ($value) {
-                    return 'Rp. '.number_format($value, 2);
+                    return 'Rp. ' . number_format($value, 2);
                 }),
 
-            Column::make('Kategori', 'kategori_produk')
+            Column::make('Kategori', 'category')
                 ->sortable()
-                ->secondaryHeaderFilter('kategori_produk')
+                ->secondaryHeaderFilter('product_category')
                 ->attributes(fn ($value) => [
                     'class' => 'text-capitilize font-weight-bold',
                 ]),
 
-            ImageColumn::make('Gambar Produk', 'gambar_produk')
+            ImageColumn::make('Gambar Produk', 'image')
                 ->location(
-                    fn ($row) => asset('storage/'.$row->gambar_produk)
+                    fn ($row) => asset('storage/' . $row->image)
                 )
                 ->attributes(fn ($row) => [
                     'class' => 'text-danger font-weight-bold',
-                    'alt' => $row->name.'Gambar rusak',
+                    'alt' => 'Gambar rusak',
                     'style' => 'width: 50px;',
                 ]),
 
             Column::make('Aksi')
                 ->label(function ($row) {
                     $deleteButton = view('datatable.components.shared.button.delete-button', [
-                        'href' => route('dashboard.produk.destroy', $row->id),
+                        'href' => route('dashboard.products.destroy', $row->slug),
                     ]);
 
                     $editButton = view('datatable.components.shared.button.edit-button', [
-                        'href' => route('dashboard.produk.edit', $row->id),
+                        'href' => route('dashboard.products.edit', $row->slug),
                     ]);
 
                     return view('datatable.components.shared.action-container.index', [

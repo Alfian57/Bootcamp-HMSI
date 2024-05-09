@@ -15,9 +15,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasUuids, Notifiable;
 
-    protected $primaryKey = 'id_user';
-
-    protected $guarded = ['id_user'];
+    protected $guarded = ['id'];
 
     protected $hidden = [
         'password',
@@ -25,6 +23,6 @@ class User extends Authenticatable
 
     public function pembelian(): HasMany
     {
-        return $this->hasMany(Pembelian::class);
+        return $this->hasMany(Purchase::class);
     }
 }

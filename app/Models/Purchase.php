@@ -8,23 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Pembelian extends Model
+class Purchase extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $primaryKey = 'id_pembelian';
-
-    protected $table = 'pembelian';
-
-    protected $guarded = ['id_pembelian'];
+    protected $guarded = ['id'];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function item(): HasMany
+    public function purchaseItems(): HasMany
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(PurchaseItem::class);
     }
 }
