@@ -1,6 +1,6 @@
-@extends('auth.layouts.main')
+@section('title', 'Login')
 
-@section('content')
+<x-auth-layouts::main>
     <div class="auth-logo">
         <a href="#"><img src="{{ asset('assets/compiled/svg/logo.svg') }}" alt="Logo"></a>
     </div>
@@ -11,7 +11,8 @@
     <form action="{{ route('login.authenticate') }}" method="POST">
         @csrf
 
-        <x-auth::ui.input type="email" icon="bi bi-person" name="email" placeholder="Email" value="{{ old('email') }}" />
+        <x-auth::ui.input type="email" icon="bi bi-person" name="email" placeholder="Email"
+            value="{{ old('email') }}" />
 
         <x-auth::ui.input type="password" icon="bi bi-shield-lock" name="password" placeholder="Password" />
 
@@ -20,7 +21,7 @@
 
     <div class="text-center mt-5 text-lg fs-4">
         <p>
-            <a class="font-bold" href="#">Lupa password?</a>
+            <a class="font-bold" href="{{ route('password.request') }}" wire:navigate>Lupa password?</a>
         </p>
     </div>
-@endsection
+</x-auth-layouts::main>

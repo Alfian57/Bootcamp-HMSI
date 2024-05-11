@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\UserController;
@@ -21,6 +22,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'login'])->name('login');
     Route::post('/', [AuthController::class, 'authenticate'])->name('login.authenticate');
+
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'request'])->name('password.request');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'email'])->name('password.email');
+    Route::get('/forgot-password/{token}', [ForgotPasswordController::class, 'reset'])->name('password.reset');
+    Route::post('/forgot-password/{token}', [ForgotPasswordController::class, 'update'])->name('password.update');
 });
 
 Route::middleware('auth')->prefix('dashboard')->as('dashboard.')->group(function () {

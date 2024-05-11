@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_active');
             $table->boolean('is_admin');
             $table->date('last_login')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
