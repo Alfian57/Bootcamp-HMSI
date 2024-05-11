@@ -87,7 +87,10 @@ class UsersTable extends DataTableComponent
             }
         });
 
-        User::whereIn('id', $this->getSelected())->delete();
+        User::query()
+            ->whereIn('id', $this->getSelected())
+            ->whereNot('id', auth()->user()->id)
+            ->delete();
     }
 
     public function exportSelected()
@@ -142,14 +145,19 @@ class UsersTable extends DataTableComponent
 
             Column::make('Aksi')
                 ->label(function ($row) {
-                    $deleteButton = view('datatable.components.shared.button.delete-button', [
-                        'href' => route('dashboard.users.destroy', $row->id),
-                    ]);
+                    if ($row->id != auth()->user()->id) {
+                        $deleteButton = view('datatable.components.shared.button.delete-button', [
+                            'href' => route('dashboard.users.destroy', $row->id),
+                        ]);
+                    } else {
+                        $deleteButton = null;
+                    }
 
                     $editButton = view('datatable.components.shared.button.action-button', [
                         'href' => route('dashboard.users.edit', $row->id),
                         'class' => 'btn-warning',
                         'text' => 'Ubah',
+                        'navigate' => true,
                     ]);
 
                     return view('datatable.components.shared.action-container.index', [

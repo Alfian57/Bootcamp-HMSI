@@ -24,8 +24,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::anonymousComponentNamespace('dashboard.components', 'dashboard');
         Blade::anonymousComponentNamespace('auth.components', 'auth');
         Blade::anonymousComponentNamespace('datatable.components', 'datatable');
+        Blade::anonymousComponentNamespace('errors.components', 'errors');
 
         Blade::anonymousComponentNamespace('dashboard.layouts', 'dashboard-layouts');
+        Blade::anonymousComponentNamespace('errors.layouts', 'errors-layouts');
 
         App::setLocale('id');
     }

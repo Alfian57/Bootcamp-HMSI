@@ -21,8 +21,8 @@ class PurchaseExport implements FromCollection, WithHeadings
     {
         return [
             ['Nama Pembeli', $this->purchase->user->name],
-            ['Total Harga', 'Rp ' . number_format($this->purchase->total_price, 2)],
-            ['Total Berat', $this->purchase->total_weight . ' kg'],
+            ['Total Harga', 'Rp '.number_format($this->purchase->total_price, 2)],
+            ['Total Berat', $this->purchase->total_weight.' kg'],
             ['Status', $this->displayStatus($this->purchase->status)],
             ['Waktu Pembelian', $this->purchase->created_at->format('Y-m-d H:i:s')],
             [],
@@ -42,9 +42,9 @@ class PurchaseExport implements FromCollection, WithHeadings
             ->select('products.name', 'products.price as price', 'quantity', 'total_price', 'note')
             ->get()
             ->each(function ($item) {
-                $item->price = 'Rp ' . number_format($item->price, 2);
-                $item->quantity = $item->quantity . ' barang';
-                $item->total_price = 'Rp ' . number_format($item->total_price, 2);
+                $item->price = 'Rp '.number_format($item->price, 2);
+                $item->quantity = $item->quantity.' barang';
+                $item->total_price = 'Rp '.number_format($item->total_price, 2);
             });
     }
 

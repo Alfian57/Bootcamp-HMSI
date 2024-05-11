@@ -127,6 +127,7 @@ class ProductsTable extends DataTableComponent
                         'href' => route('dashboard.products.edit', $row->slug),
                         'class' => 'btn-warning',
                         'text' => 'Ubah',
+                        'navigate' => true,
                     ]);
 
                     return view('datatable.components.shared.action-container.index', [

@@ -11,7 +11,7 @@
     <form action="{{ route('login.authenticate') }}" method="POST">
         @csrf
 
-        <x-auth::ui.input type="email" icon="bi bi-person" name="email" placeholder="Email" />
+        <x-auth::ui.input type="email" icon="bi bi-person" name="email" placeholder="Email" value="{{ old('email') }}" />
 
         <x-auth::ui.input type="password" icon="bi bi-shield-lock" name="password" placeholder="Password" />
 

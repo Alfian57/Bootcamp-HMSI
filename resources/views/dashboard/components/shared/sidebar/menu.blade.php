@@ -1,5 +1,5 @@
 <li class="sidebar-item @if (str_contains(request()->url(), $href)) active @endif">
-    <a href="{{ $href }}" class='sidebar-link' wire:navigate>
+    <a href="{{ $href }}" class='sidebar-link' wire:navigate.hover>
         @isset($icon)
             {{ $icon }}
         @endisset

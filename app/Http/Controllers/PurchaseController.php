@@ -22,7 +22,8 @@ class PurchaseController extends Controller
 
     public function export(Purchase $purchase)
     {
-        $fileName = 'purchases_' . $purchase->user->name . '_' . date('Y-m-d_H-i-s') . '.xlsx';
+        $fileName = 'purchases_'.$purchase->user->name.'_'.date('Y-m-d_H-i-s').'.xlsx';
+
         return Excel::download(new PurchaseExport($purchase), $fileName);
     }
 }

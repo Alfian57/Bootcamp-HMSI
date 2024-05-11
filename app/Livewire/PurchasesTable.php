@@ -98,6 +98,7 @@ class PurchasesTable extends DataTableComponent
                         'href' => route('dashboard.purchases.show', $row->id),
                         'class' => 'btn-primary',
                         'text' => 'Detail',
+                        'navigate' => true,
                     ]);
 
                     $exportButton = view('datatable.components.shared.button.action-button', [
