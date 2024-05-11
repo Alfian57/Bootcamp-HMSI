@@ -1,4 +1,4 @@
-@props(['label', 'checked'])
+@props(['label', 'checked' => false])
 
 @php
     $id = $id ?? Str::uuid();

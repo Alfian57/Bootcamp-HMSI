@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Mail\UserRegistrationMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -26,16 +29,19 @@ class UserController extends Controller
         if ($request->photo_profile) {
             $validatedData['photo_profile'] = $request->file('photo_profile')->store('photo_profile');
         }
+        if (!isset($validatedData['password'])) {
+            $validatedData['password'] = Str::random(10);
+        }
 
-        User::create($validatedData);
+        $user = User::create($validatedData);
+        Mail::to($user->email)->queue(new UserRegistrationMail(
+            $user->name,
+            $user->email,
+            $validatedData['password'],
+        ));
+
         toast('Pengguna berhasil ditambahkan', 'success');
-
         return redirect()->route('dashboard.users.index');
-    }
-
-    public function show(User $user)
-    {
-        //
     }
 
     public function edit(User $user)

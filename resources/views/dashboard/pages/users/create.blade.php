@@ -14,9 +14,6 @@
             <x-dashboard::ui.input type="text" label="Nama Pengguna" name="name"
                 placeholder="Masukan nama pengguna" value="{{ old('name') }}" required />
 
-            <x-dashboard::ui.input type="password" label="Password" name="password" placeholder="Masukan password"
-                value="{{ old('password') }}" />
-
             <x-dashboard::ui.input.select label="Jenis Kelamin" name="gender" :options="[
                 \App\Enums\Gender::MALE->value => 'Laki-laki',
                 \App\Enums\Gender::FEMALE->value => 'Perempuan',
@@ -41,6 +38,12 @@
                 placeholder="Masukan nomor telepon" value="{{ old('phone_number') }}" required />
 
             <x-dashboard::ui.input type="file" label="Foto Profil" name="photo_profile" />
+
+            <livewire:show-password-input />
+
+            <p class="text-info">Kredensial user akan dikirimkan ke email. Jika tidak mengisi password, maka akan
+                di-generate secara
+                otomatis. Password dapat diubah di fitur "Ganti password" setelah berhasil login</p>
 
             <div class="d-flex justify-content-end mb-5 mt-3">
                 <x-dashboard::ui.button type="submit">
