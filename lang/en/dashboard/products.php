@@ -50,30 +50,37 @@ return [
         'name' => [
             'label' => 'Product Name',
             'placeholder' => 'Enter the name',
+            'attribute' => 'Product name',
         ],
         'description' => [
             'label' => 'Description',
             'placeholder' => 'Enter the description',
+            'attribute' => 'Description',
         ],
         'price' => [
             'label' => 'Price',
             'placeholder' => 'Enter the price (Rp)',
+            'attribute' => 'Price',
         ],
         'category' => [
             'label' => 'Category',
             'placeholder' => 'Select the category',
+            'attribute' => 'Category',
         ],
         'weight' => [
             'label' => 'Weight',
             'placeholder' => 'Enter the weight (Kg)',
+            'attribute' => 'Weight',
         ],
         'stock' => [
             'label' => 'Stock',
             'placeholder' => 'Enter the stock',
+            'attribute' => 'Stock',
         ],
         'image' => [
             'label' => 'Image',
             'placeholder' => 'Choose the image',
+            'attribute' => 'Image',
         ],
     ],
 ];

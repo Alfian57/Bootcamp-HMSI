@@ -10,7 +10,7 @@ return [
         'title' => 'Buat Pengguna',
         'page-title' => 'Buat Pengguna',
         'success-message' => 'Pengguna berhasil ditambahkan',
-        'form-info' => 'Kredensial pengguna akan dikirimkan ke email. Jika Anda tidak mengisi password, maka akan dihasilkan secara otomatis. Password dapat diubah melalui fitur "Ubah Password" setelah berhasil login.',
+        'form-info' => 'Kredensial pengguna akan dikirimkan ke email. Jika Anda tidak mengisi password, maka akan dibuat secara otomatis. Password dapat diubah melalui fitur "Ubah Password" setelah berhasil login.',
     ],
     'edit' => [
         'title' => 'Edit Pengguna',
@@ -64,14 +64,17 @@ return [
         'email' => [
             'label' => 'Email',
             'placeholder' => 'Masukkan email',
+            'attribute' => 'Alamat email',
         ],
         'name' => [
-            'label' => 'Nama Pengguna',
+            'label' => 'Username',
             'placeholder' => 'Masukkan nama',
+            'attribute' => 'Nama',
         ],
         'gender' => [
             'label' => 'Jenis Kelamin',
             'placeholder' => 'Pilih jenis kelamin',
+            'attribute' => 'Jenis kelamin',
         ],
         'is-admin' => [
             'label' => 'Peran',
@@ -80,6 +83,7 @@ return [
                 'admin' => 'Admin',
                 'buyer' => 'Pembeli',
             ],
+            'attribute' => 'Peran',
         ],
         'is-active' => [
             'label' => 'Status Akun',
@@ -88,18 +92,22 @@ return [
                 'active' => 'Aktif',
                 'inactive' => 'Nonaktif',
             ],
+            'attribute' => 'Status akun',
         ],
         'date-of-birth' => [
             'label' => 'Tanggal Lahir',
             'placeholder' => 'Masukkan tanggal lahir',
+            'attribute' => 'Tanggal lahir',
         ],
         'phone-number' => [
             'label' => 'Nomor Telepon',
             'placeholder' => 'Masukkan nomor telepon',
+            'attribute' => 'Nomor telepon',
         ],
         'photo-profile' => [
             'label' => 'Foto Profil',
             'placeholder' => 'Pilih foto profil',
+            'attribute' => 'Foto profil',
         ],
         'show-password' => [
             'label' => 'Tampilkan Password',
@@ -107,10 +115,12 @@ return [
         'password' => [
             'label' => 'Password',
             'placeholder' => 'Masukkan password',
+            'attribute' => 'Password',
         ],
         'password-confirmation' => [
             'label' => 'Konfirmasi Password',
             'placeholder' => 'Masukkan konfirmasi password',
+            'attribute' => 'Konfirmasi password',
         ],
     ],
 ];

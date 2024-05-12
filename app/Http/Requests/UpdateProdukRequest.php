@@ -33,4 +33,22 @@ class UpdateProdukRequest extends FormRequest
             'image' => ['image'],
         ];
     }
+
+    /**
+     * Get the validation attributes that apply to the request.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'name' => __('dashboard/users.form.name.attribute'),
+            'description' => __('dashboard/users.form.description.attribute'),
+            'price' => __('dashboard/users.form.price.attribute'),
+            'category' => __('dashboard/users.form.category.attribute'),
+            'weight' => __('dashboard/users.form.weight.attribute'),
+            'stock' => __('dashboard/users.form.stock.attribute'),
+            'image' => __('dashboard/users.form.image.attribute'),
+        ];
+    }
 }

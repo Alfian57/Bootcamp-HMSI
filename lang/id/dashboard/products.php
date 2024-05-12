@@ -50,30 +50,37 @@ return [
         'name' => [
             'label' => 'Nama Produk',
             'placeholder' => 'Masukkan nama',
+            'attribute' => 'Nama produk',
         ],
         'description' => [
             'label' => 'Deskripsi',
             'placeholder' => 'Masukkan deskripsi',
+            'attribute' => 'Deskripsi',
         ],
         'price' => [
             'label' => 'Harga',
             'placeholder' => 'Masukkan harga (Rp)',
+            'attribute' => 'Harga',
         ],
         'category' => [
             'label' => 'Kategori',
             'placeholder' => 'Pilih kategori',
+            'attribute' => 'Kategori',
         ],
         'weight' => [
             'label' => 'Berat',
             'placeholder' => 'Masukkan berat (Kg)',
+            'attribute' => 'Berat',
         ],
         'stock' => [
             'label' => 'Stok',
             'placeholder' => 'Masukkan stok',
+            'attribute' => 'Stok',
         ],
         'image' => [
             'label' => 'Gambar',
             'placeholder' => 'Pilih gambar',
+            'attribute' => 'Gambar',
         ],
     ],
 ];

@@ -64,14 +64,17 @@ return [
         'email' => [
             'label' => 'Email',
             'placeholder' => 'Enter the email',
+            'attribute' => 'Email address',
         ],
         'name' => [
-            'label' => 'Username',
+            'label' => 'Name',
             'placeholder' => 'Enter the name',
+            'attribute' => 'Name',
         ],
         'gender' => [
             'label' => 'Gender',
             'placeholder' => 'Select the gender',
+            'attribute' => 'Gender',
         ],
         'is-admin' => [
             'label' => 'Role',
@@ -80,6 +83,7 @@ return [
                 'admin' => 'Admin',
                 'buyer' => 'Buyer',
             ],
+            'attribute' => 'Role',
         ],
         'is-active' => [
             'label' => 'Account Status',
@@ -88,18 +92,22 @@ return [
                 'active' => 'Active',
                 'inactive' => 'Inactive',
             ],
+            'attribute' => 'Account status',
         ],
         'date-of-birth' => [
             'label' => 'Date of Birth',
             'placeholder' => 'Enter the date of birth',
+            'attribute' => 'Date of birth',
         ],
         'phone-number' => [
             'label' => 'Phone Number',
             'placeholder' => 'Enter the phone number',
+            'attribute' => 'Phone number',
         ],
         'photo-profile' => [
             'label' => 'Profile Photo',
             'placeholder' => 'Choose the profile photo',
+            'attribute' => 'Profile photo',
         ],
         'show-password' => [
             'label' => 'Show Password',
@@ -107,10 +115,12 @@ return [
         'password' => [
             'label' => 'Password',
             'placeholder' => 'Enter the password',
+            'attribute' => 'Password',
         ],
         'password-confirmation' => [
             'label' => 'Password Confirmation',
             'placeholder' => 'Enter the password confirmation',
+            'attribute' => 'Password confirmation',
         ],
     ],
 ];
