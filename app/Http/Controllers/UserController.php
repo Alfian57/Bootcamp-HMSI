@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Gender;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Mail\UserRegistrationMail;
@@ -20,7 +21,20 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('dashboard.pages.users.create');
+        return view('dashboard.pages.users.create', [
+            'genderOptions' => [
+                Gender::MALE->value => __('enum.gender.male'),
+                Gender::FEMALE->value => __('enum.gender.female'),
+            ],
+            'roleOptions' => [
+                true => __('dashboard/users.form.is-admin.items.admin'),
+                false => __('dashboard/users.form.is-admin.items.buyer'),
+            ],
+            'activeOptions' => [
+                true => __('dashboard/users.form.is-active.items.active'),
+                false => __('dashboard/users.form.is-active.items.inactive'),
+            ],
+        ]);
     }
 
     public function store(StoreUserRequest $request)
@@ -29,7 +43,7 @@ class UserController extends Controller
         if ($request->photo_profile) {
             $validatedData['photo_profile'] = $request->file('photo_profile')->store('photo_profile');
         }
-        if (!isset($validatedData['password'])) {
+        if (! isset($validatedData['password'])) {
             $validatedData['password'] = Str::random(10);
         }
 
@@ -40,7 +54,8 @@ class UserController extends Controller
             $validatedData['password'],
         ));
 
-        toast('Pengguna berhasil ditambahkan', 'success');
+        toast(__('dashboard/users.create.success-message'), 'success');
+
         return redirect()->route('dashboard.users.index');
     }
 
@@ -48,6 +63,18 @@ class UserController extends Controller
     {
         return view('dashboard.pages.users.edit', [
             'user' => $user,
+            'genderOptions' => [
+                Gender::MALE->value => __('enum.gender.male'),
+                Gender::FEMALE->value => __('enum.gender.female'),
+            ],
+            'roleOptions' => [
+                true => __('dashboard/users.form.is-admin.items.admin'),
+                false => __('dashboard/users.form.is-admin.items.buyer'),
+            ],
+            'activeOptions' => [
+                true => __('dashboard/users.form.is-active.items.active'),
+                false => __('dashboard/users.form.is-active.items.inactive'),
+            ],
         ]);
     }
 
@@ -63,7 +90,7 @@ class UserController extends Controller
         }
 
         $user->update($validatedData);
-        toast('Pengguna berhasil diubah', 'success');
+        toast(__('dashboard/users.edit.success-message'), 'success');
 
         return redirect()->route('dashboard.users.index');
     }
@@ -77,7 +104,7 @@ class UserController extends Controller
         }
 
         $user->delete();
-        toast('Pengguna berhasil dihapus', 'success');
+        toast(__('dashboard/users.delete.success-message'), 'success');
 
         return redirect()->route('dashboard.users.index');
     }

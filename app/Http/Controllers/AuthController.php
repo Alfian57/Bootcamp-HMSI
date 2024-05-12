@@ -34,4 +34,13 @@ class AuthController extends Controller
 
         return back()->withInput();
     }
+
+    public function logout()
+    {
+        auth()->logout();
+
+        toast('Logout berhasil', 'success');
+
+        return redirect()->route('login');
+    }
 }

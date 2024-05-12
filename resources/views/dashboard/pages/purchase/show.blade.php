@@ -1,9 +1,9 @@
 @section('title')
-    Kelola Detail Pembelian
+    {{ __('dashboard/purchase-items.index.title') }}
 @endsection
 
 <x-dashboard-layouts::main>
-    <x-dashboard::shared.page-container title="Detail Pembelian">
+    <x-dashboard::shared.page-container title="{{ __('dashboard/purchase-items.index.page-title') }}">
 
         <livewire:purchase-items-table :purchase="$purchase" />
 

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,7 +28,5 @@ class AppServiceProvider extends ServiceProvider
         Blade::anonymousComponentNamespace('dashboard.layouts', 'dashboard-layouts');
         Blade::anonymousComponentNamespace('auth.layouts', 'auth-layouts');
         Blade::anonymousComponentNamespace('errors.layouts', 'errors-layouts');
-
-        App::setLocale('id');
     }
 }

@@ -26,9 +26,9 @@ class PurchaseItemsTable extends DataTableComponent
     public function filters(): array
     {
         return [
-            TextFilter::make('Nama Barang', 'product_name')
+            TextFilter::make(__('dashboard/purchase-items.datatable.filter.product-name.label'), 'product_name')
                 ->config([
-                    'placeholder' => 'Cari Barang',
+                    'placeholder' => __('dashboard/purchase-items.datatable.filter.product-name.placeholder'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('product.name', 'like', '%'.$value.'%');
@@ -46,24 +46,24 @@ class PurchaseItemsTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('Nama Barang', 'product.name')
+            Column::make(__('dashboard/purchase-items.datatable.column.product-name'), 'product.name')
                 ->sortable()
                 ->secondaryHeaderFilter('product_name'),
 
-            Column::make('Harga Satuan', 'product.price')
+            Column::make(__('dashboard/purchase-items.datatable.column.price'), 'product.price')
                 ->format(fn ($value) => 'Rp '.number_format($value, 2))
                 ->sortable()
                 ->collapseOnMobile(),
 
-            Column::make('Kuantitas', 'quantity')
+            Column::make(__('dashboard/purchase-items.datatable.column.quantity'), 'quantity')
                 ->format(fn ($value) => $value.' Barang')
                 ->sortable(),
 
-            Column::make('Total Harga', 'total_price')
+            Column::make(__('dashboard/purchase-items.datatable.column.price'), 'total_price')
                 ->format(fn ($value) => 'Rp '.number_format($value, 2))
                 ->sortable(),
 
-            Column::make('Catatan', 'note')
+            Column::make(__('dashboard/purchase-items.datatable.column.note'), 'note')
                 ->collapseAlways(),
         ];
     }

@@ -29,19 +29,19 @@ class ProductsTable extends DataTableComponent
     public function filters(): array
     {
         return [
-            TextFilter::make('Nama Produk', 'product_name')
+            TextFilter::make(__('dashboard/products.datatable.filter.product-name.label'), 'product_name')
                 ->config([
-                    'placeholder' => 'Cari Produk',
+                    'placeholder' => __('dashboard/products.datatable.filter.product-name.placeholder'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('products.name', 'like', '%'.$value.'%');
                 }),
 
-            SelectFilter::make('Status Pembayaran', 'product_category')
+            SelectFilter::make(__('dashboard/products.datatable.filter.product-category.label'), 'product_category')
                 ->options([
-                    '' => 'Pilih',
-                    ProductCategory::ELECTRONIC->value => 'Elektronik',
-                    ProductCategory::COMPUTER->value => 'Komputer',
+                    '' => __('dashboard/products.datatable.filter.product-category.items.all'),
+                    ProductCategory::ELECTRONIC->value => __('dashboard/products.datatable.filter.product-category.items.electronic'),
+                    ProductCategory::COMPUTER->value => __('dashboard/products.datatable.filter.product-category.items.computer'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('products.category', $value);
@@ -81,43 +81,43 @@ class ProductsTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('Nama', 'name')
+            Column::make(__('dashboard/products.datatable.column.name'), 'name')
                 ->sortable()
                 ->secondaryHeaderFilter('product_name'),
 
-            Column::make('Harga', 'price')
+            Column::make(__('dashboard/products.datatable.column.price'), 'price')
                 ->sortable()
                 ->format(fn ($value) => 'Rp. '.number_format($value, 2))
                 ->collapseOnMobile(),
 
-            Column::make('Kategori', 'category')
+            Column::make(__('dashboard/products.datatable.column.category'), 'category')
                 ->sortable()
                 ->secondaryHeaderFilter('product_category')
                 ->format(fn ($value) => $this->displayCategory($value))
                 ->collapseOnMobile(),
 
-            ImageColumn::make('Gambar Produk', 'image')
+            ImageColumn::make(__('dashboard/products.datatable.column.image'), 'image')
                 ->location(
                     fn ($row) => asset('storage/'.$row->image)
                 )
                 ->attributes(fn ($row) => [
                     'class' => 'text-danger font-weight-bold',
-                    'alt' => 'Gambar rusak',
+                    'alt' => __('dashboard/global.image-error'),
                     'style' => 'width: 50px;',
                 ])
                 ->collapseOnTablet(),
 
-            Column::make('Stok', 'stock')
+            Column::make(__('dashboard/products.datatable.column.stock'), 'stock')
                 ->collapseAlways(),
 
-            Column::make('Berat', 'weight')
+            Column::make(__('dashboard/products.datatable.column.weight'), 'weight')
                 ->format(fn ($value) => $value.' kg')
                 ->collapseAlways(),
 
-            Column::make('Deksripsi', 'description')
+            Column::make(__('dashboard/products.datatable.column.description'), 'description')
                 ->collapseAlways(),
 
-            Column::make('Aksi')
+            Column::make(__('dashboard/products.datatable.column.action'))
                 ->label(function ($row) {
                     $deleteButton = view('datatable.components.shared.button.delete-button', [
                         'href' => route('dashboard.products.destroy', $row->slug),
@@ -126,7 +126,7 @@ class ProductsTable extends DataTableComponent
                     $editButton = view('datatable.components.shared.button.action-button', [
                         'href' => route('dashboard.products.edit', $row->slug),
                         'class' => 'btn-warning',
-                        'text' => 'Ubah',
+                        'text' => __('dashboard/global.edit-btn'),
                         'navigate' => true,
                     ]);
 
@@ -140,9 +140,9 @@ class ProductsTable extends DataTableComponent
     private function displayCategory($value): string
     {
         if ($value == ProductCategory::ELECTRONIC->value) {
-            return 'Elektronik';
+            return __('enum.product-category.electronic');
         } elseif ($value == ProductCategory::COMPUTER->value) {
-            return 'Komputer';
+            return __('enum.product-category.computer');
         }
 
         return '';

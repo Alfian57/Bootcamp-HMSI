@@ -6,14 +6,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    function confirmation(event, text) {
+    function confirmation(event, text, confirmButtonText = "Yes, delete it", cancelButtonText = "Cancel") {
         event.preventDefault();
         Swal.fire({
             icon: 'question',
             title: text,
             showCancelButton: true,
-            confirmButtonText: 'Yes',
-            denyButtonText: 'No',
+            confirmButtonText: confirmButtonText,
+            cancelButtonText: cancelButtonText,
             customClass: {
                 cancelButton: 'order-1',
                 confirmButton: 'order-2',

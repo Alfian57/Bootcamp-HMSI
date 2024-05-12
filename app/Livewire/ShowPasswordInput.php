@@ -10,7 +10,7 @@ class ShowPasswordInput extends Component
 
     public function toggleShowPassword()
     {
-        $this->showPassword = !$this->showPassword;
+        $this->showPassword = ! $this->showPassword;
     }
 
     public function render()

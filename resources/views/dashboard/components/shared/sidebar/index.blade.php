@@ -12,7 +12,7 @@
                     </x-slot>
 
                     <x-slot name="text">
-                        <span>Dashboard</span>
+                        <span>{{ __('dashboard/sidebar.dashboard') }}</span>
                     </x-slot>
                 </x-dashboard::shared.sidebar.menu>
 
@@ -22,7 +22,7 @@
                     </x-slot>
 
                     <x-slot name="text">
-                        <span>Produk</span>
+                        <span>{{ __('dashboard/sidebar.products') }}</span>
                     </x-slot>
                 </x-dashboard::shared.sidebar.menu>
 
@@ -32,7 +32,7 @@
                     </x-slot>
 
                     <x-slot name="text">
-                        <span>Pembelian</span>
+                        <span>{{ __('dashboard/sidebar.purchases') }}</span>
                     </x-slot>
                 </x-dashboard::shared.sidebar.menu>
 
@@ -42,7 +42,7 @@
                     </x-slot>
 
                     <x-slot name="text">
-                        <span>Pengguna</span>
+                        <span>{{ __('dashboard/sidebar.users') }}</span>
                     </x-slot>
                 </x-dashboard::shared.sidebar.menu>
             </ul>

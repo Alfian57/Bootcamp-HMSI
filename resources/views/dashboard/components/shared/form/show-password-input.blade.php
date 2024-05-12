@@ -1,9 +1,12 @@
 <div>
-    <x-dashboard::ui.input.switch label="Tambahkan Password" wire:click="toggleShowPassword" />
+    <x-dashboard::ui.input.switch label="{{ __('dashboard/users.form.show-password.label') }}"
+        wire:click="toggleShowPassword" />
     @if ($showPassword)
-        <x-dashboard::ui.input type="password" label="Password" name="password" placeholder="Masukan password" />
+        <x-dashboard::ui.input type="password" label="{{ __('dashboard/users.form.password.label') }}" name="password"
+            placeholder="{{ __('dashboard/users.form.password.placeholder') }}" />
 
-        <x-dashboard::ui.input type="password" label="Konfirmasi Password" name="password_confirmation"
-            placeholder="Masukan Konfirmasi password" />
+        <x-dashboard::ui.input type="password" label="{{ __('dashboard/users.form.password-confirmation.label') }}"
+            name="password_confirmation"
+            placeholder="{{ __('dashboard/users.form.password-confirmation.placeholder') }}" />
     @endif
 </div>

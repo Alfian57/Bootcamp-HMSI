@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ProductCategory;
 use App\Http\Requests\StoreProdukRequest;
 use App\Http\Requests\UpdateProdukRequest;
 use App\Models\Product;
@@ -16,7 +17,12 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('dashboard.pages.product.create');
+        return view('dashboard.pages.product.create', [
+            'options' => [
+                ProductCategory::ELECTRONIC->value => __('enum.product-category.electronic'),
+                ProductCategory::COMPUTER->value => __('enum.product-category.computer'),
+            ],
+        ]);
     }
 
     public function store(StoreProdukRequest $request)
@@ -25,7 +31,7 @@ class ProductController extends Controller
         $validatedData['image'] = $this->handleImageUpload($request);
 
         Product::create($validatedData);
-        toast('Produk berhasil ditambahkan', 'success');
+        toast(__('dashboard/products.create.success-message'), 'success');
 
         return redirect()->route('dashboard.products.index');
     }
@@ -34,6 +40,10 @@ class ProductController extends Controller
     {
         return view('dashboard.pages.product.edit', [
             'product' => $product,
+            'options' => [
+                ProductCategory::ELECTRONIC->value => __('enum.product-category.electronic'),
+                ProductCategory::COMPUTER->value => __('enum.product-category.computer'),
+            ],
         ]);
     }
 
@@ -43,7 +53,7 @@ class ProductController extends Controller
         $validatedData['image'] = $this->handleImageUpload($request, $product);
 
         $product->update($validatedData);
-        toast('Produk berhasil diubah', 'success');
+        toast(__('dashboard/products.edit.success-message'), 'success');
 
         return redirect()->route('dashboard.products.index');
     }
@@ -55,7 +65,7 @@ class ProductController extends Controller
         }
 
         $product->delete();
-        toast('Produk berhasil dihapus', 'success');
+        toast(__('dashboard/products.delete.success-message'), 'success');
 
         return redirect()->route('dashboard.products.index');
     }

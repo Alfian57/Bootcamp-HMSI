@@ -26,30 +26,30 @@ class PurchasesTable extends DataTableComponent
     public function filters(): array
     {
         return [
-            TextFilter::make('Nama Pengguna', 'user_name')
+            TextFilter::make(__('dashboard/purchases.datatable.filter.customer-name.label'), 'customer_name')
                 ->config([
-                    'placeholder' => 'Cari Pengguna',
+                    'placeholder' => __('dashboard/purchases.datatable.filter.customer-name.placeholder'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('user.name', 'like', '%'.$value.'%');
                 }),
 
-            SelectFilter::make('Jenis Kelamin', 'purchase_status')
+            SelectFilter::make(__('dashboard/purchases.datatable.filter.purchase-status.label'), 'purchase_status')
                 ->options([
-                    '' => 'Pilih',
-                    PurchaceStatus::UNPAID->value => 'Belum DIbayar',
-                    PurchaceStatus::PAID->value => 'Sudah Dibayar',
-                    PurchaceStatus::BEING_SHIPPED->value => 'Sedang Dikirim',
-                    PurchaceStatus::COMPLETED->value => 'Selesai',
-                    PurchaceStatus::CANCELLED->value => 'Dibatalkan',
+                    '' => __('dashboard/purchases.datatable.filter.purchase-status.items.all'),
+                    PurchaceStatus::UNPAID->value => __('dashboard/purchases.datatable.filter.purchase-status.items.unpaid'),
+                    PurchaceStatus::PAID->value => __('dashboard/purchases.datatable.filter.purchase-status.items.paid'),
+                    PurchaceStatus::BEING_SHIPPED->value => __('dashboard/purchases.datatable.filter.purchase-status.items.being-shipped'),
+                    PurchaceStatus::COMPLETED->value => __('dashboard/purchases.datatable.filter.purchase-status.items.completed'),
+                    PurchaceStatus::CANCELLED->value => __('dashboard/purchases.datatable.filter.purchase-status.items.cancelled'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('purchases.status', $value);
                 }),
 
-            DateRangeFilter::make('Tanggal Pembelian', 'purchase_date')
+            DateRangeFilter::make(__('dashboard/purchases.datatable.filter.purchase-time.label'), 'purchase_date')
                 ->config([
-                    'placeholder' => 'Tanggal Pembelian',
+                    'placeholder' => __('dashboard/purchases.datatable.filter.purchase-time.placeholder'),
                 ])
                 ->filter(function (Builder $builder, array $dateRange) {
                     $builder
@@ -68,43 +68,43 @@ class PurchasesTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('Nama Pembeli', 'user.name')
+            Column::make(__('dashboard/purchases.datatable.column.customer-name'), 'user.name')
                 ->sortable()
-                ->secondaryHeaderFilter('user_name'),
+                ->secondaryHeaderFilter('customer_name'),
 
-            Column::make('Total Harga', 'total_price')
+            Column::make(__('dashboard/purchases.datatable.column.total-price'), 'total_price')
                 ->format(fn ($value) => 'Rp '.number_format($value, 2))
                 ->sortable()
                 ->collapseOnTablet(),
 
-            Column::make('Total Berat', 'total_weight')
+            Column::make(__('dashboard/purchases.datatable.column.total-weight'), 'total_weight')
                 ->format(fn ($value) => $value.' kg')
                 ->sortable()
                 ->collapseOnTablet(),
 
-            Column::make('Status', 'status')
+            Column::make(__('dashboard/purchases.datatable.column.status'), 'status')
                 ->sortable()
                 ->format(fn ($value) => $this->displayStatus($value))
                 ->secondaryHeaderFilter('purchase_status')
                 ->collapseOnMobile(),
 
-            Column::make('Waktu Pembelian', 'created_at')
+            Column::make(__('dashboard/purchases.datatable.column.created-at'), 'created_at')
                 ->sortable()
                 ->secondaryHeaderFilter('purchase_date'),
 
-            Column::make('Aksi')
+            Column::make(__('dashboard/purchases.datatable.column.action'))
                 ->label(function ($row) {
                     $detailButton = view('datatable.components.shared.button.action-button', [
                         'href' => route('dashboard.purchases.show', $row->id),
                         'class' => 'btn-primary',
-                        'text' => 'Detail',
+                        'text' => __('dashboard/global.detail-btn'),
                         'navigate' => true,
                     ]);
 
                     $exportButton = view('datatable.components.shared.button.action-button', [
                         'href' => route('dashboard.purchases.export', $row->id),
                         'class' => 'btn-secondary',
-                        'text' => 'Ekspor Excel',
+                        'text' => __('dashboard/global.download-btn'),
                     ]);
 
                     return view('datatable.components.shared.action-container.index', [
@@ -117,15 +117,15 @@ class PurchasesTable extends DataTableComponent
     private function displayStatus($value): string
     {
         if ($value == PurchaceStatus::UNPAID->value) {
-            return 'Belum Dibayar';
+            return __('enum.purchase-status.unpaid');
         } elseif ($value == PurchaceStatus::PAID->value) {
-            return 'Sudah Dibayar';
+            return __('enum.purchase-status.paid');
         } elseif ($value == PurchaceStatus::BEING_SHIPPED->value) {
-            return 'Sedang Dikirim';
+            return __('enum.purchase-status.being-shipped');
         } elseif ($value == PurchaceStatus::COMPLETED->value) {
-            return 'Selesai';
+            return __('enum.purchase-status.completed');
         } elseif ($value == PurchaceStatus::CANCELLED->value) {
-            return 'Dibatalkan';
+            return __('enum.purchase-status.cancelled');
         } else {
             return '';
         }

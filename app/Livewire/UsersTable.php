@@ -30,37 +30,37 @@ class UsersTable extends DataTableComponent
     public function filters(): array
     {
         return [
-            TextFilter::make('Nama Pengguna', 'user_name')
+            TextFilter::make(__('dashboard/users.datatable.filter.user-name.label'), 'user_name')
                 ->config([
-                    'placeholder' => 'Cari Pengguna',
+                    'placeholder' => __('dashboard/users.datatable.filter.user-name.placeholder'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('users.name', 'like', '%'.$value.'%');
                 }),
 
-            TextFilter::make('Email Pengguna', 'user_email')
+            TextFilter::make(__('dashboard/users.datatable.filter.user-email.label'), 'user_email')
                 ->config([
-                    'placeholder' => 'Cari Email',
+                    'placeholder' => __('dashboard/users.datatable.filter.user-email.placeholder'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('users.email', 'like', '%'.$value.'%');
                 }),
 
-            SelectFilter::make('Jenis Kelamin', 'user_gender')
+            SelectFilter::make(__('dashboard/users.datatable.filter.user-gender.label'), 'user_gender')
                 ->options([
-                    '' => 'Pilih',
-                    Gender::MALE->value => 'Lak-laki',
-                    Gender::FEMALE->value => 'Perempuan',
+                    '' => __('dashboard/users.datatable.filter.user-gender.items.all'),
+                    Gender::MALE->value => __('dashboard/users.datatable.filter.user-gender.items.male'),
+                    Gender::FEMALE->value => __('dashboard/users.datatable.filter.user-gender.items.female'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('users.gender', $value);
                 }),
 
-            SelectFilter::make('Admin', 'is_admin')
+            SelectFilter::make(__('dashboard/users.datatable.filter.user-is-admin.label'), 'is_admin')
                 ->options([
-                    '' => 'Pilih',
-                    true => 'Admin',
-                    false => 'Bukan Admin',
+                    '' => __('dashboard/users.datatable.filter.user-is-admin.items.all'),
+                    true => __('dashboard/users.datatable.filter.user-is-admin.items.admin'),
+                    false => __('dashboard/users.datatable.filter.user-is-admin.items.buyer'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('users.is_admin', $value);
@@ -103,47 +103,47 @@ class UsersTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('Nama', 'name')
+            Column::make(__('dashboard/users.datatable.column.name'), 'name')
                 ->sortable()
                 ->secondaryHeaderFilter('user_name'),
 
-            Column::make('Email', 'email')
+            Column::make(__('dashboard/users.datatable.column.email'), 'email')
                 ->sortable()
                 ->secondaryHeaderFilter('user_email')
                 ->collapseOnMobile(),
 
-            Column::make('Jenis Kelamin', 'gender')
+            Column::make(__('dashboard/users.datatable.column.gender'), 'gender')
                 ->sortable()
                 ->format(fn ($value) => $this->displayGender($value))
                 ->secondaryHeaderFilter('user_gender')
                 ->collapseOnMobile(),
 
-            ImageColumn::make('Foto Profil', 'photo_profile')
+            ImageColumn::make(__('dashboard/users.datatable.column.photo-profile'), 'photo_profile')
                 ->location(
                     fn ($row) => asset('storage/'.$row->photo_profile)
                 )
                 ->attributes(fn ($row) => [
                     'class' => 'text-danger font-weight-bold',
-                    'alt' => 'Gambar rusak',
+                    'alt' => __('dashboard/global.image-error'),
                     'style' => 'width: 50px;',
                 ])
                 ->collapseOnTablet(),
 
-            BooleanColumn::make('Admin', 'is_admin')
+            BooleanColumn::make(__('dashboard/users.datatable.column.admin'), 'is_admin')
                 ->sortable()
                 ->secondaryHeaderFilter('is_admin'),
 
-            Column::make('Tanggal Lahir', 'date_of_birth')
+            Column::make(__('dashboard/users.datatable.column.date-of-birth'), 'date_of_birth')
                 ->collapseAlways(),
 
-            Column::make('No Telepon', 'phone_number')
+            Column::make(__('dashboard/users.datatable.column.phone-number'), 'phone_number')
                 ->collapseAlways(),
 
-            Column::make('Tanggal Terakir Login', 'last_login')
+            Column::make(__('dashboard/users.datatable.column.last-login'), 'last_login')
                 ->format(fn ($value) => $value ? $value : 'Belum pernah login')
                 ->collapseAlways(),
 
-            Column::make('Aksi')
+            Column::make(__('dashboard/users.datatable.column.action'))
                 ->label(function ($row) {
                     if ($row->id != auth()->user()->id) {
                         $deleteButton = view('datatable.components.shared.button.delete-button', [
@@ -156,7 +156,7 @@ class UsersTable extends DataTableComponent
                     $editButton = view('datatable.components.shared.button.action-button', [
                         'href' => route('dashboard.users.edit', $row->id),
                         'class' => 'btn-warning',
-                        'text' => 'Ubah',
+                        'text' => __('dashboard/global.edit-btn'),
                         'navigate' => true,
                     ]);
 
@@ -170,9 +170,9 @@ class UsersTable extends DataTableComponent
     private function displayGender($value): string
     {
         if ($value == Gender::MALE->value) {
-            return 'Laki-laki';
+            return __('enum.gender.male');
         } elseif ($value == Gender::FEMALE->value) {
-            return 'Perempuan';
+            return __('enum.gender.female');
         }
 
         return '';
