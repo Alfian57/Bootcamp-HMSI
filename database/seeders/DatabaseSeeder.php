@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Enums\Gender;
+use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -16,18 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Alfian Gading Saputra',
-            'email' => 'alfian.admin@gmail.com',
-            'password' => 'password',
-            'gender' => Gender::MALE->value,
-            'date_of_birth' => '2004-09-10',
-            'phone_number' => '0895363116378',
-            'is_active' => true,
-            'is_admin' => true,
+        $this->call([
+            UserSeeder::class,
         ]);
 
         User::factory()->count(10)->create();
+        Category::factory()->count(10)->create();
         Purchase::factory()->count(10)->create();
     }
 }

@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Product extends Model
+class Category extends Model
 {
     use HasFactory, HasSlug, HasUuids;
 
@@ -23,18 +22,8 @@ class Product extends Model
             ->saveSlugsTo('slug');
     }
 
-    public function getRouteKeyName()
+    public function products(): HasMany
     {
-        return 'slug';
-    }
-
-    public function purchaseItems(): HasMany
-    {
-        return $this->hasMany(PurchaseItem::class);
-    }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Product::class);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LocalizationController;
@@ -38,6 +39,8 @@ Route::middleware('auth')->prefix('dashboard')->as('dashboard.')->group(function
     Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
     Route::resource('products', ProductController::class)->except('show');
+
+    Route::resource('categories', CategoryController::class)->except('show');
 
     Route::resource('users', UserController::class)->except('show');
 

@@ -38,11 +38,7 @@ return [
             ],
             'product-category' => [
                 'label' => 'Category',
-                'items' => [
-                    'all' => 'All',
-                    'electronic' => 'Electronic',
-                    'computer' => 'Computer',
-                ],
+                'placeholder' => 'Search by category name',
             ],
         ],
     ],

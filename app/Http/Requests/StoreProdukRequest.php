@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\ProductCategory;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreProdukRequest extends FormRequest
 {
@@ -27,7 +25,7 @@ class StoreProdukRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'price' => ['required', 'integer'],
-            'category' => ['required', Rule::in([ProductCategory::ELECTRONIC->value, ProductCategory::COMPUTER->value])],
+            'category_id' => ['required', 'exists:categories,id'],
             'weight' => ['required', 'integer'],
             'stock' => ['required', 'integer'],
             'image' => ['image'],

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ProductCategory;
 use App\Http\Requests\StoreProdukRequest;
 use App\Http\Requests\UpdateProdukRequest;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,10 +18,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('dashboard.pages.product.create', [
-            'options' => [
-                ProductCategory::ELECTRONIC->value => __('enum.product-category.electronic'),
-                ProductCategory::COMPUTER->value => __('enum.product-category.computer'),
-            ],
+            'categoryOptions' => Category::all()->pluck('name', 'id'),
         ]);
     }
 
@@ -40,10 +37,7 @@ class ProductController extends Controller
     {
         return view('dashboard.pages.product.edit', [
             'product' => $product,
-            'options' => [
-                ProductCategory::ELECTRONIC->value => __('enum.product-category.electronic'),
-                ProductCategory::COMPUTER->value => __('enum.product-category.computer'),
-            ],
+            'categoryOptions' => Category::all()->pluck('name', 'id'),
         ]);
     }
 

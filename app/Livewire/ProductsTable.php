@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Enums\ProductCategory;
 use App\Exports\ProductsExport;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +10,6 @@ use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
-use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 
 class ProductsTable extends DataTableComponent
@@ -37,14 +35,12 @@ class ProductsTable extends DataTableComponent
                     $builder->where('products.name', 'like', '%'.$value.'%');
                 }),
 
-            SelectFilter::make(__('dashboard/products.datatable.filter.product-category.label'), 'product_category')
-                ->options([
-                    '' => __('dashboard/products.datatable.filter.product-category.items.all'),
-                    ProductCategory::ELECTRONIC->value => __('dashboard/products.datatable.filter.product-category.items.electronic'),
-                    ProductCategory::COMPUTER->value => __('dashboard/products.datatable.filter.product-category.items.computer'),
+            TextFilter::make(__('dashboard/products.datatable.filter.product-category.label'), 'product_category')
+                ->config([
+                    'placeholder' => __('dashboard/products.datatable.filter.product-category.placeholder'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('products.category', $value);
+                    $builder->where('products.name', 'like', '%'.$value.'%');
                 }),
         ];
     }
@@ -90,10 +86,9 @@ class ProductsTable extends DataTableComponent
                 ->format(fn ($value) => 'Rp. '.number_format($value, 2))
                 ->collapseOnMobile(),
 
-            Column::make(__('dashboard/products.datatable.column.category'), 'category')
+            Column::make(__('dashboard/products.datatable.column.category'), 'category.name')
                 ->sortable()
                 ->secondaryHeaderFilter('product_category')
-                ->format(fn ($value) => $this->displayCategory($value))
                 ->collapseOnMobile(),
 
             ImageColumn::make(__('dashboard/products.datatable.column.image'), 'image')
@@ -135,16 +130,5 @@ class ProductsTable extends DataTableComponent
                     ]);
                 }),
         ];
-    }
-
-    private function displayCategory($value): string
-    {
-        if ($value == ProductCategory::ELECTRONIC->value) {
-            return __('enum.product-category.electronic');
-        } elseif ($value == ProductCategory::COMPUTER->value) {
-            return __('enum.product-category.computer');
-        }
-
-        return '';
     }
 }

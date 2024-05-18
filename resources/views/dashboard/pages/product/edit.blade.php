@@ -22,8 +22,8 @@
                 name="price" placeholder="{{ __('dashboard/products.form.price.placeholder') }}"
                 value="{{ old('price', $product->price) }}" required />
 
-            <x-dashboard::ui.input.select label="{{ __('dashboard/products.form.category.label') }}" name="category"
-                :options="$options" :selected="old('category', $product->category)" required />
+            <x-dashboard::ui.input.select label="{{ __('dashboard/products.form.category.label') }}" name="category_id"
+                :options="$categoryOptions" :selected="old('category_id', $product->category_id)" required />
 
             <x-dashboard::ui.input type="number" label="{{ __('dashboard/products.form.weight.label') }}"
                 name="weight" placeholder="{{ __('dashboard/products.form.weight.placeholder') }}"

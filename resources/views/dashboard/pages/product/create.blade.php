@@ -18,8 +18,8 @@
                 placeholder="{{ __('dashboard/products.form.price.placeholder') }}" value="{{ old('price') }}"
                 required />
 
-            <x-dashboard::ui.input.select label="{{ __('dashboard/products.form.category.label') }}" name="category"
-                :options="$options" :selected="old('category')" required />
+            <x-dashboard::ui.input.select label="{{ __('dashboard/products.form.category.label') }}" name="category_id"
+                :options="$categoryOptions" :selected="old('category_id')" required />
 
             <x-dashboard::ui.input type="number" label="{{ __('dashboard/products.form.weight.label') }}"
                 name="weight" placeholder="{{ __('dashboard/products.form.weight.placeholder') }}"

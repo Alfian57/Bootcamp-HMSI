@@ -126,8 +126,8 @@ class PurchasesTable extends DataTableComponent
             return __('enum.purchase-status.completed');
         } elseif ($value == PurchaceStatus::CANCELLED->value) {
             return __('enum.purchase-status.cancelled');
-        } else {
-            return '';
         }
+
+        return '';
     }
 }

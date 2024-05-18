@@ -38,11 +38,7 @@ return [
             ],
             'product-category' => [
                 'label' => 'Kategori',
-                'items' => [
-                    'all' => 'Semua',
-                    'electronic' => 'Elektronik',
-                    'computer' => 'Komputer',
-                ],
+                'placeholder' => 'Cari berdasarkan nama kategori',
             ],
         ],
     ],

@@ -26,6 +26,16 @@
                     </x-slot>
                 </x-dashboard::shared.sidebar.menu>
 
+                <x-dashboard::shared.sidebar.menu href="{{ route('dashboard.categories.index') }}">
+                    <x-slot name="icon">
+                        <i class="bi bi-grid-fill"></i>
+                    </x-slot>
+
+                    <x-slot name="text">
+                        <span>{{ __('dashboard/sidebar.categories') }}</span>
+                    </x-slot>
+                </x-dashboard::shared.sidebar.menu>
+
                 <x-dashboard::shared.sidebar.menu href="{{ route('dashboard.purchases.index') }}">
                     <x-slot name="icon">
                         <i class="bi bi-grid-fill"></i>

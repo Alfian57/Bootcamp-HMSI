@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\ProductCategory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
             'price' => $this->faker->numberBetween(1000, 10000),
-            'category' => $this->faker->randomElement([ProductCategory::ELECTRONIC->value, ProductCategory::COMPUTER->value]),
+            'category_id' => $this->faker->randomElement(Category::pluck('id')),
             'weight' => $this->faker->numberBetween(1, 100),
             'stock' => $this->faker->numberBetween(0, 100),
             'image' => null,
