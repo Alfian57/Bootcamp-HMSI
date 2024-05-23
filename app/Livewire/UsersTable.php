@@ -74,10 +74,13 @@ class UsersTable extends DataTableComponent
             ->latest('users.created_at');
     }
 
-    public array $bulkActions = [
-        'deleteSelected' => 'Hapus',
-        'exportSelected' => 'Ekspor Excel',
-    ];
+    public function bulkActions(): array
+    {
+        return [
+            'deleteSelected' => __('dashboard/global.bulk-action.delete'),
+            'exportSelected' => __('dashboard/global.bulk-action.export-excel'),
+        ];
+    }
 
     public function deleteSelected()
     {

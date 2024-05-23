@@ -9603,14 +9603,14 @@ if (supported()) {
         );
 
         // clean up event
-        document.removeEventListener('DOMContentLoaded', dispatch);
+        document.removeEventListener('livewire:navigated', dispatch);
     };
 
     if (document.readyState !== 'loading') {
         // move to back of execution queue, FilePond should have been exported by then
         setTimeout(() => dispatch(), 0);
     } else {
-        document.addEventListener('DOMContentLoaded', dispatch);
+        document.addEventListener('livewire:navigated', dispatch);
     }
 
     // updates the OptionTypes object based on the current options

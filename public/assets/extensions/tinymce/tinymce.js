@@ -3888,7 +3888,7 @@
         return doc.readyState === 'complete' || doc.readyState === 'interactive' && doc.body;
       };
       const readyHandler = () => {
-        removeEvent(win, 'DOMContentLoaded', readyHandler);
+        removeEvent(win, 'livewire:navigated', readyHandler);
         removeEvent(win, 'load', readyHandler);
         if (!eventUtils.domLoaded) {
           eventUtils.domLoaded = true;
@@ -3899,7 +3899,7 @@
       if (isDocReady()) {
         readyHandler();
       } else {
-        addEvent(win, 'DOMContentLoaded', readyHandler);
+        addEvent(win, 'livewire:navigated', readyHandler);
       }
       if (!eventUtils.domLoaded) {
         addEvent(win, 'load', readyHandler);
@@ -3940,7 +3940,7 @@
           let nativeHandler = defaultNativeHandler;
           let capture = false;
           let fakeName = false;
-          if (name === 'DOMContentLoaded') {
+          if (name === 'livewire:navigated') {
             name = 'ready';
           }
           if (self.domLoaded && name === 'ready' && target.readyState === 'complete') {

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("livewire:navigated", () => {
 
   const themeOptions = document.body.classList.contains("theme-dark")
     ? {

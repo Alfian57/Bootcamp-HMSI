@@ -12599,7 +12599,7 @@
             );
 
             // clean up event
-            document.removeEventListener('DOMContentLoaded', dispatch);
+            document.removeEventListener('livewire:navigated', dispatch);
         };
 
         if (document.readyState !== 'loading') {
@@ -12608,7 +12608,7 @@
                 return dispatch();
             }, 0);
         } else {
-            document.addEventListener('DOMContentLoaded', dispatch);
+            document.addEventListener('livewire:navigated', dispatch);
         }
 
         // updates the OptionTypes object based on the current options

@@ -13,4 +13,9 @@ return [
         'confirm' => 'Yes, delete',
         'cancel' => 'Cancel',
     ],
+
+    'bulk-action' => [
+        'delete' => 'Delete',
+        'export-excel' => 'Export Excel',
+    ],
 ];

@@ -26900,7 +26900,7 @@
     SVG.parser = {
       native: SVG.create('svg')
     };
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('livewire:navigated', function () {
       if (!SVG.parser.draw) {
         SVG.prepare();
       }

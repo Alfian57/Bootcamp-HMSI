@@ -1,5 +1,5 @@
 
-const THEME_KEY = "theme"
+var THEME_KEY = "theme"
 
 function toggleDarkTheme() {
   setTheme(
@@ -47,7 +47,7 @@ function initTheme() {
   return setTheme(mediaQuery.matches ? "dark" : "light", true)
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('livewire:navigated', () => {
   const toggler = document.getElementById("toggle-dark")
   const theme = localStorage.getItem(THEME_KEY)
 

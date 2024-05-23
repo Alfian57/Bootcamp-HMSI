@@ -7715,7 +7715,7 @@ if (!Array.prototype.find) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("livewire:navigated", function () {
   // Disable resizing in Firefox
   document.execCommand("enableObjectResizing", false, false);
   // Disable automatic linkifying in IE11

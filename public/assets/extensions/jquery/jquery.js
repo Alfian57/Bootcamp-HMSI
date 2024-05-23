@@ -3849,7 +3849,7 @@ jQuery.ready.then = readyList.then;
 
 // The ready event handler and self cleanup method
 function completed() {
-	document.removeEventListener( "DOMContentLoaded", completed );
+	document.removeEventListener( "livewire:navigated", completed );
 	window.removeEventListener( "load", completed );
 	jQuery.ready();
 }
@@ -3867,7 +3867,7 @@ if ( document.readyState === "complete" ||
 } else {
 
 	// Use the handy event callback
-	document.addEventListener( "DOMContentLoaded", completed );
+	document.addEventListener( "livewire:navigated", completed );
 
 	// A fallback to window.onload, that will always work
 	window.addEventListener( "load", completed );

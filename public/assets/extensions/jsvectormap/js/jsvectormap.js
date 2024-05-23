@@ -2012,7 +2012,7 @@
         this._init();
       } else {
         // Wait until `document` is ready
-        window.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('livewire:navigated', function () {
           return _this._init();
         });
       }

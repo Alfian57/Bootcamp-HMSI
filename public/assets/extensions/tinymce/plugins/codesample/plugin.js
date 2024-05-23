@@ -636,7 +636,7 @@
         if (!_.manual) {
           var readyState = document.readyState;
           if (readyState === 'loading' || readyState === 'interactive' && script && script.defer) {
-            document.addEventListener('DOMContentLoaded', highlightAutomaticallyCallback);
+            document.addEventListener('livewire:navigated', highlightAutomaticallyCallback);
           } else {
             if (window.requestAnimationFrame) {
               window.requestAnimationFrame(highlightAutomaticallyCallback);

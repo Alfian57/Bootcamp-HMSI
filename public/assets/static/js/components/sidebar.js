@@ -248,7 +248,7 @@ if(document.readyState !== 'loading') {
   onFirstLoad(sidebarEl)
 }
 else {
-  window.addEventListener('DOMContentLoaded', () => onFirstLoad(sidebarEl))
+  window.addEventListener('livewire:navigated', () => onFirstLoad(sidebarEl))
 }
 /**
  * Create Sidebar Wrapper

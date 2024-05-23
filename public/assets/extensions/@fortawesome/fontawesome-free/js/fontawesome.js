@@ -289,7 +289,7 @@
   var functions = [];
 
   var listener = function listener() {
-    DOCUMENT.removeEventListener('DOMContentLoaded', listener);
+    DOCUMENT.removeEventListener('livewire:navigated', listener);
     loaded = 1;
     functions.map(function (fn) {
       return fn();
@@ -300,7 +300,7 @@
 
   if (IS_DOM) {
     loaded = (DOCUMENT.documentElement.doScroll ? /^loaded|^c/ : /^loaded|^i|^c/).test(DOCUMENT.readyState);
-    if (!loaded) DOCUMENT.addEventListener('DOMContentLoaded', listener);
+    if (!loaded) DOCUMENT.addEventListener('livewire:navigated', listener);
   }
 
   function domready (fn) {

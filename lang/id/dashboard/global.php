@@ -13,4 +13,9 @@ return [
         'confirm' => 'Ya, hapus',
         'cancel' => 'Batal',
     ],
+
+    'bulk-action' => [
+        'delete' => 'Hapus',
+        'export-excel' => 'Ekspor Excel',
+    ],
 ];
