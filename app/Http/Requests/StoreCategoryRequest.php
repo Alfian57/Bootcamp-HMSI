@@ -25,4 +25,11 @@ class StoreCategoryRequest extends FormRequest
             'name' => ['required', 'unique:categories'],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('dashboard/categories.form.name.attribute'),
+        ];
+    }
 }

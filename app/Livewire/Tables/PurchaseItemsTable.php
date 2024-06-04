@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Tables;
 
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
@@ -20,6 +20,7 @@ class PurchaseItemsTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setSearchStatus(false);
         $this->setFiltersVisibilityStatus(false);
+        $this->setSortingDisabled();
         $this->setAdditionalSelects(['purchase_items.id as id']);
     }
 

@@ -5,7 +5,8 @@ return [
     'edit-btn' => 'Edit',
     'submit-btn' => 'Submit',
     'detail-btn' => 'Detail',
-    'download-btn' => 'Download File',
+    'download-excel-btn' => 'Download Excel',
+    'download-pdf-btn' => 'Download PDF',
 
     'image-error' => 'Image is corrupted or empty',
     'delete-confirmation' => [

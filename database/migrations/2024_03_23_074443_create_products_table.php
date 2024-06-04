@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedBigInteger('price');
             $table->foreignUuid('category_id')->references('id')->on('categories')->cascadeOnDelete();
-            $table->unsignedSmallInteger('weight');
+            $table->unsignedFloat('weight');
             $table->unsignedSmallInteger('stock');
             $table->string('image')->nullable();
             $table->timestamps();

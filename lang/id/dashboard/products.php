@@ -8,16 +8,15 @@ return [
     ],
     'create' => [
         'title' => 'Buat Produk',
-        'page-title' => 'Buat Produk',
         'success-message' => 'Produk berhasil ditambahkan',
     ],
     'edit' => [
         'title' => 'Edit Produk',
-        'page-title' => 'Edit Produk',
         'success-message' => 'Produk berhasil diperbarui',
         'form-info' => 'Masukkan gambar jika ingin mengubahnya dan biarkan kosong jika tidak ingin mengubah',
     ],
     'delete' => [
+        'title' => 'Hapus Produk',
         'success-message' => 'Produk berhasil dihapus',
     ],
     'datatable' => [
@@ -26,10 +25,10 @@ return [
             'price' => 'Harga',
             'category' => 'Kategori',
             'image' => 'Gambar',
-            'action' => 'Aksi',
             'stock' => 'Stok',
             'weight' => 'Berat',
             'description' => 'Deskripsi',
+            'action' => 'Aksi',
         ],
         'filter' => [
             'product-name' => [
@@ -54,7 +53,7 @@ return [
             'attribute' => 'Deskripsi',
         ],
         'price' => [
-            'label' => 'Harga',
+            'label' => 'Harga (Rp)',
             'placeholder' => 'Masukkan harga (Rp)',
             'attribute' => 'Harga',
         ],
@@ -64,7 +63,7 @@ return [
             'attribute' => 'Kategori',
         ],
         'weight' => [
-            'label' => 'Berat',
+            'label' => 'Berat (Kg)',
             'placeholder' => 'Masukkan berat (Kg)',
             'attribute' => 'Berat',
         ],
@@ -77,6 +76,9 @@ return [
             'label' => 'Gambar',
             'placeholder' => 'Pilih gambar',
             'attribute' => 'Gambar',
+        ],
+        'empty-image' => [
+            'label' => 'Kosongkan Gambar',
         ],
     ],
 ];

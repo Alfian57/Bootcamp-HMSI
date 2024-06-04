@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Tables;
 
 use App\Enums\Gender;
 use App\Exports\UsersExport;
@@ -24,6 +24,7 @@ class UsersTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setSearchStatus(false);
         $this->setFiltersVisibilityStatus(false);
+        $this->setSortingDisabled();
         $this->setAdditionalSelects(['users.id as id', 'users.photo_profile as photo_profile']);
     }
 
@@ -107,16 +108,13 @@ class UsersTable extends DataTableComponent
     {
         return [
             Column::make(__('dashboard/users.datatable.column.name'), 'name')
-                ->sortable()
                 ->secondaryHeaderFilter('user_name'),
 
             Column::make(__('dashboard/users.datatable.column.email'), 'email')
-                ->sortable()
                 ->secondaryHeaderFilter('user_email')
                 ->collapseOnMobile(),
 
             Column::make(__('dashboard/users.datatable.column.gender'), 'gender')
-                ->sortable()
                 ->format(fn ($value) => $this->displayGender($value))
                 ->secondaryHeaderFilter('user_gender')
                 ->collapseOnMobile(),
@@ -133,7 +131,6 @@ class UsersTable extends DataTableComponent
                 ->collapseOnTablet(),
 
             BooleanColumn::make(__('dashboard/users.datatable.column.admin'), 'is_admin')
-                ->sortable()
                 ->secondaryHeaderFilter('is_admin'),
 
             Column::make(__('dashboard/users.datatable.column.date-of-birth'), 'date_of_birth')
@@ -148,24 +145,9 @@ class UsersTable extends DataTableComponent
 
             Column::make(__('dashboard/users.datatable.column.action'))
                 ->label(function ($row) {
-                    if ($row->id != auth()->user()->id) {
-                        $deleteButton = view('datatable.components.shared.button.delete-button', [
-                            'href' => route('dashboard.users.destroy', $row->id),
-                        ]);
-                    } else {
-                        $deleteButton = null;
-                    }
+                    $user = User::where('id', $row->id)->firstOrFail();
 
-                    $editButton = view('datatable.components.shared.button.action-button', [
-                        'href' => route('dashboard.users.edit', $row->id),
-                        'class' => 'btn-warning',
-                        'text' => __('dashboard/global.edit-btn'),
-                        'navigate' => true,
-                    ]);
-
-                    return view('datatable.components.shared.action-container.index', [
-                        'components' => [$deleteButton, $editButton],
-                    ]);
+                    return view('datatable.components.shared.column.user-action-column', compact('user'));
                 }),
         ];
     }

@@ -4,6 +4,17 @@ return [
     'index' => [
         'title' => 'Pembelian',
         'page-title' => 'Daftar Pembelian',
+        'create-button' => 'Tambah Pembelian',
+    ],
+    'create' => [
+        'title' => 'Tambah Pembelian',
+        'page-title' => 'Tambah Pembelian',
+        'success-message' => 'Pembelian berhasil ditambahkan',
+    ],
+    'edit' => [
+        'title' => 'Edit Pembelian',
+        'page-title' => 'Edit Pembelian',
+        'success-message' => 'Pembelian berhasil diperbarui',
     ],
     'datatable' => [
         'column' => [
@@ -35,5 +46,25 @@ return [
                 'placeholder' => 'Cari berdasarkan waktu pembelian',
             ],
         ],
+    ],
+    'form' => [
+        'status' => [
+            'label' => 'Status Pembelian',
+            'attribute' => 'Status Pembelian',
+        ],
+        'product' => [
+            'label' => 'Nama Produk',
+            'attribute' => 'Nama Produk',
+        ],
+        'quantity' => [
+            'label' => 'Jumlah',
+            'placeholder' => 'Masukan jumlah',
+            'attribute' => 'Jumlah',
+        ],
+        'note' => [
+            'label' => 'Catatan',
+            'attribute' => 'Catatan',
+        ],
+        'add-item-button' => '+ Tambah Item',
     ],
 ];

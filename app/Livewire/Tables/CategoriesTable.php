@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Tables;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
@@ -33,29 +33,23 @@ class CategoriesTable extends DataTableComponent
         ];
     }
 
+    public function builder(): Builder
+    {
+        return Category::query()
+            ->latest('categories.created_at');
+    }
+
     public function columns(): array
     {
         return [
             Column::make(__('dashboard/categories.datatable.column.name'), 'name')
-                ->sortable()
                 ->secondaryHeaderFilter('category_name'),
 
             Column::make(__('dashboard/categories.datatable.column.action'))
                 ->label(function ($row) {
-                    $deleteButton = view('datatable.components.shared.button.delete-button', [
-                        'href' => route('dashboard.categories.destroy', $row->id),
-                    ]);
+                    $category = Category::where('id', $row->id)->firstOrFail();
 
-                    $editButton = view('datatable.components.shared.button.action-button', [
-                        'href' => route('dashboard.categories.edit', $row->id),
-                        'class' => 'btn-warning',
-                        'text' => __('dashboard/global.edit-btn'),
-                        'navigate' => true,
-                    ]);
-
-                    return view('datatable.components.shared.action-container.index', [
-                        'components' => [$deleteButton, $editButton],
-                    ]);
+                    return view('datatable.components.shared.column.category-action-column', compact('category'));
                 }),
         ];
     }

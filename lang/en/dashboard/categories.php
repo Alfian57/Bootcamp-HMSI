@@ -8,15 +8,14 @@ return [
     ],
     'create' => [
         'title' => 'Create Category',
-        'page-title' => 'Create Category',
         'success-message' => 'Category successfully added',
     ],
     'edit' => [
         'title' => 'Edit Category',
-        'page-title' => 'Edit Category',
         'success-message' => 'Category successfully updated',
     ],
     'delete' => [
+        'title' => 'Delete Category',
         'success-message' => 'Category successfully deleted',
     ],
     'datatable' => [

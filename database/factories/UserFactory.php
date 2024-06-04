@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'password' => 'password', // password
             'gender' => $this->faker->randomElement([Gender::MALE->value, Gender::FEMALE->value]),
             'date_of_birth' => $this->faker->date(max: '2005-01-01'),
-            'phone_number' => $this->faker->phoneNumber(),
+            'phone_number' => $this->faker->numerify('############'),
             'photo_profile' => null,
             'is_active' => true,
             'is_admin' => $this->faker->boolean(),

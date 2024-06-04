@@ -5,7 +5,8 @@ return [
     'edit-btn' => 'Ubah',
     'submit-btn' => 'Kirim',
     'detail-btn' => 'Detail',
-    'download-btn' => 'Unduh Berkas',
+    'download-excel-btn' => 'Unduh Excel',
+    'download-pdf-btn' => 'Unduh PDF',
 
     'image-error' => 'Gambar rusak atau kosong',
     'delete-confirmation' => [

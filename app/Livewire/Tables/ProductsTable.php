@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Tables;
 
 use App\Exports\ProductsExport;
 use App\Models\Product;
@@ -21,7 +21,7 @@ class ProductsTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setSearchStatus(false);
         $this->setFiltersVisibilityStatus(false);
-        $this->setAdditionalSelects(['products.id as id', 'products.slug as slug', 'products.image as image']);
+        $this->setAdditionalSelects(['products.id as id', 'products.image as image']);
     }
 
     public function filters(): array
@@ -81,16 +81,13 @@ class ProductsTable extends DataTableComponent
     {
         return [
             Column::make(__('dashboard/products.datatable.column.name'), 'name')
-                ->sortable()
                 ->secondaryHeaderFilter('product_name'),
 
             Column::make(__('dashboard/products.datatable.column.price'), 'price')
-                ->sortable()
                 ->format(fn ($value) => 'Rp. '.number_format($value, 2))
                 ->collapseOnMobile(),
 
             Column::make(__('dashboard/products.datatable.column.category'), 'category.name')
-                ->sortable()
                 ->secondaryHeaderFilter('product_category')
                 ->collapseOnMobile(),
 
@@ -117,20 +114,9 @@ class ProductsTable extends DataTableComponent
 
             Column::make(__('dashboard/products.datatable.column.action'))
                 ->label(function ($row) {
-                    $deleteButton = view('datatable.components.shared.button.delete-button', [
-                        'href' => route('dashboard.products.destroy', $row->slug),
-                    ]);
+                    $product = Product::where('id', $row->id)->firstOrFail();
 
-                    $editButton = view('datatable.components.shared.button.action-button', [
-                        'href' => route('dashboard.products.edit', $row->slug),
-                        'class' => 'btn-warning',
-                        'text' => __('dashboard/global.edit-btn'),
-                        'navigate' => true,
-                    ]);
-
-                    return view('datatable.components.shared.action-container.index', [
-                        'components' => [$deleteButton, $editButton],
-                    ]);
+                    return view('datatable.components.shared.column.product-action-column', compact('product'));
                 }),
         ];
     }

@@ -6,6 +6,7 @@
 @livewireStyles
 
 <body>
+    @stack('body-init')
     @include('sweetalert::alert')
 
     <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
@@ -16,9 +17,7 @@
 
         <div id="main">
             <x-dashboard::shared.top-bar />
-
             {{ $slot }}
-
             <x-dashboard::shared.footer />
         </div>
     </div>

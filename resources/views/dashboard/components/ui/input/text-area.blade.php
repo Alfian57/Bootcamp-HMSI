@@ -1,4 +1,4 @@
-@props(['label', 'value'])
+@props(['label', 'value' => ''])
 
 @php
     $id = Str::uuid();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Tables;
 
 use App\Enums\PurchaceStatus;
 use App\Models\Purchase;
@@ -20,6 +20,7 @@ class PurchasesTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setSearchStatus(false);
         $this->setFiltersVisibilityStatus(false);
+        $this->setSortingDisabled();
         $this->setAdditionalSelects(['purchases.id as id']);
     }
 
@@ -101,14 +102,20 @@ class PurchasesTable extends DataTableComponent
                         'navigate' => true,
                     ]);
 
-                    $exportButton = view('datatable.components.shared.button.action-button', [
-                        'href' => route('dashboard.purchases.export', $row->id),
+                    $exportPdfButton = view('datatable.components.shared.button.action-button', [
+                        'href' => route('dashboard.purchases.export-pdf', $row->id),
+                        'class' => 'btn-info',
+                        'text' => __('dashboard/global.download-pdf-btn'),
+                    ]);
+
+                    $exportExcelButton = view('datatable.components.shared.button.action-button', [
+                        'href' => route('dashboard.purchases.export-excel', $row->id),
                         'class' => 'btn-secondary',
-                        'text' => __('dashboard/global.download-btn'),
+                        'text' => __('dashboard/global.download-excel-btn'),
                     ]);
 
                     return view('datatable.components.shared.action-container.index', [
-                        'components' => [$detailButton, $exportButton],
+                        'components' => [$detailButton, $exportPdfButton, $exportExcelButton],
                     ]);
                 }),
         ];

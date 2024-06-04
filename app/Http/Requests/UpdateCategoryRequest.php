@@ -26,4 +26,11 @@ class UpdateCategoryRequest extends FormRequest
             'name' => ['required', Rule::unique('categories')->ignore($this->category->id)],
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => __('dashboard/categories.form.name.attribute'),
+        ];
+    }
 }

@@ -8,15 +8,14 @@ return [
     ],
     'create' => [
         'title' => 'Buat Kategori',
-        'page-title' => 'Buat Kategori',
         'success-message' => 'Kategori berhasil ditambahkan',
     ],
     'edit' => [
         'title' => 'Edit Kategori',
-        'page-title' => 'Edit Kategori',
         'success-message' => 'Kategori berhasil diperbarui',
     ],
     'delete' => [
+        'title' => 'Hapus Kategori',
         'success-message' => 'Kategori berhasil dihapus',
     ],
     'datatable' => [

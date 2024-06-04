@@ -4,6 +4,17 @@ return [
     'index' => [
         'title' => 'Purchases',
         'page-title' => 'Purchase List',
+        'create-button' => 'Create Purchase',
+    ],
+    'create' => [
+        'title' => 'Create Purchase',
+        'page-title' => 'Create Purchase',
+        'success-message' => 'Purchase successfully added',
+    ],
+    'edit' => [
+        'title' => 'Edit Purchase',
+        'page-title' => 'Edit Purchase',
+        'success-message' => 'Purchase successfully updated',
     ],
     'datatable' => [
         'column' => [
@@ -35,5 +46,25 @@ return [
                 'placeholder' => 'Search by purchase time',
             ],
         ],
+    ],
+    'form' => [
+        'status' => [
+            'label' => 'Purchase Status',
+            'attribute' => 'Purchase Status',
+        ],
+        'product' => [
+            'label' => 'Product Name',
+            'attribute' => 'Product Name',
+        ],
+        'quantity' => [
+            'label' => 'Quantity',
+            'placeholder' => 'Enter the quantity',
+            'attribute' => 'Quantity',
+        ],
+        'note' => [
+            'label' => 'Note',
+            'attribute' => 'Note',
+        ],
+        'add-item-button' => '+ Add Item',
     ],
 ];

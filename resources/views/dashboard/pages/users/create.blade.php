@@ -34,7 +34,7 @@
             <x-dashboard::ui.input type="file" label="{{ __('dashboard/users.form.photo-profile.label') }}"
                 name="photo_profile" />
 
-            <livewire:show-password-input />
+            <livewire:form.show-password-input />
 
             <p class="text-info">{{ __('dashboard/users.create.form-info') }}</p>
 

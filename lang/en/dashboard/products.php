@@ -8,16 +8,15 @@ return [
     ],
     'create' => [
         'title' => 'Create Product',
-        'page-title' => 'Create Product',
         'success-message' => 'Product successfully added',
     ],
     'edit' => [
         'title' => 'Edit Product',
-        'page-title' => 'Edit Product',
         'success-message' => 'Product successfully updated',
         'form-info' => "Enter the image if you want to change it and leave it blank if you don't want to change",
     ],
     'delete' => [
+        'title' => 'Delete Product',
         'success-message' => 'Product successfully deleted',
     ],
     'datatable' => [
@@ -54,7 +53,7 @@ return [
             'attribute' => 'Description',
         ],
         'price' => [
-            'label' => 'Price',
+            'label' => 'Price (Rp)',
             'placeholder' => 'Enter the price (Rp)',
             'attribute' => 'Price',
         ],
@@ -64,7 +63,7 @@ return [
             'attribute' => 'Category',
         ],
         'weight' => [
-            'label' => 'Weight',
+            'label' => 'Weight (Kg)',
             'placeholder' => 'Enter the weight (Kg)',
             'attribute' => 'Weight',
         ],
@@ -77,6 +76,9 @@ return [
             'label' => 'Image',
             'placeholder' => 'Choose the image',
             'attribute' => 'Image',
+        ],
+        'empty-image' => [
+            'label' => 'Empty Image',
         ],
     ],
 ];

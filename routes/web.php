@@ -1,25 +1,15 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LocalizationController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\UserController;
+use App\Livewire\Pages\CategoryList;
+use App\Livewire\Pages\ProductList;
+use App\Livewire\Pages\PurchaseList;
+use App\Livewire\Pages\UserList;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/locale/{lang}', [LocalizationController::class, 'index'])->name('locale');
 
@@ -38,13 +28,13 @@ Route::middleware('auth')->prefix('dashboard')->as('dashboard.')->group(function
 
     Route::get('/index', [DashboardController::class, 'index'])->name('index');
 
-    Route::resource('products', ProductController::class)->except('show');
+    Route::get('products', ProductList::class)->name('products.index');
 
-    Route::resource('categories', CategoryController::class)->except('show');
+    Route::get('categories', CategoryList::class)->name('categories.index');
 
-    Route::resource('users', UserController::class)->except('show');
+    Route::get('users', UserList::class)->name('users.index');
 
-    Route::get('purchases', [PurchaseController::class, 'index'])->name('purchases.index');
-    Route::get('purchases/{purchase}', [PurchaseController::class, 'show'])->name('purchases.show');
-    Route::get('purchases/{purchase}/export', [PurchaseController::class, 'export'])->name('purchases.export');
+    Route::get('purchases', PurchaseList::class)->name('purchases.index');
+    Route::get('purchases/{purchase}/export-excel', [PurchaseController::class, 'exportExcel'])->name('purchases.export-excel');
+    Route::get('purchases/{purchase}/export-pdf', [PurchaseController::class, 'exportPdf'])->name('purchases.export-pdf');
 });

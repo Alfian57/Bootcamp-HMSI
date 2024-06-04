@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Livewire\Modals\Product;
+
+use App\Livewire\Forms\CreateProductForm;
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Support\Collection;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+
+class CreateProductModal extends Component
+{
+    use WithFileUploads;
+
+    public CreateProductForm $form;
+
+    public Collection $categories;
+
+    public function mount()
+    {
+        $this->categories = Category::pluck('name', 'id');
+    }
+
+    public function save()
+    {
+        $this->validate();
+        $data = $this->form->all();
+        if ($this->form->image) {
+            $data['image'] = $this->form->image->store('products');
+        }
+        Product::create($data);
+
+        $this->reset();
+
+        toast(__('dashboard/products.create.success-message'), 'success');
+
+        return $this->redirect(route('dashboard.products.index'));
+    }
+
+    public function render()
+    {
+        return view('dashboard.components.livewire.modals.product.create-product-modal');
+    }
+}
