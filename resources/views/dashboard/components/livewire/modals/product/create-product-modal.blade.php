@@ -15,7 +15,7 @@
                 required />
 
             <x-dashboard::ui.input type="number" label="{{ __('dashboard/products.form.weight.label') }}"
-                wire:model.defer="form.weight" name="form.weight"
+                wire:model.defer="form.weight" step="any" name="form.weight"
                 placeholder="{{ __('dashboard/products.form.weight.placeholder') }}" required />
 
             <x-dashboard::ui.input type="number" label="{{ __('dashboard/products.form.stock.label') }}"
@@ -35,11 +35,16 @@
 
             <x-dashboard::ui.input.text-area label="{{ __('dashboard/products.form.description.label') }}"
                 wire:model.defer="form.description" name="form.description"
-                placeholder="{{ __('dashboard/products.form.description.placeholder') }}" required />
+                placeholder="{{ __('dashboard/products.form.description.placeholder') }}" />
 
-            <div class="d-flex justify-content-end mt-3">
+            <div class="d-flex justify-content-end mt-3" wire:loading.attr="disabled">
                 <x-dashboard::ui.button type="submit">
-                    {{ __('dashboard/global.submit-btn') }}
+                    <div wire:loading>
+                        Loading...
+                    </div>
+                    <div wire:loading.remove>
+                        {{ __('dashboard/global.submit-btn') }}
+                    </div>
                 </x-dashboard::ui.button>
             </div>
         </form>

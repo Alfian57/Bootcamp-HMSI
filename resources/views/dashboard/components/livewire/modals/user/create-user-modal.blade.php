@@ -25,27 +25,30 @@
                 name="form.phone_number" wire:model.defer="form.phone_number"
                 placeholder="{{ __('dashboard/users.form.phone-number.placeholder') }}" required />
 
-            {{-- <x-dashboard::ui.input type="file" label="{{ __('dashboard/users.form.photo-profile.label') }}"
-                wire:model.defer="form.photo_profile" /> --}}
-
             <x-dashboard::ui.input.switch label="{{ __('dashboard/users.form.show-password.label') }}"
-                wire:click="toggleShowPassword" :checked="$showPassword" />
+                wire:click="toggleShowPassword" name="toggleShowPassword" :checked="$showPassword" />
 
             @if ($showPassword)
                 <x-dashboard::ui.input type="password" label="{{ __('dashboard/users.form.password.label') }}"
-                    name="form.password" placeholder="{{ __('dashboard/users.form.password.placeholder') }}" />
+                    name="form.password" wire:model.defer="form.password"
+                    placeholder="{{ __('dashboard/users.form.password.placeholder') }}" />
 
                 <x-dashboard::ui.input type="password"
                     label="{{ __('dashboard/users.form.password-confirmation.label') }}"
-                    name="form.password_confirmation"
+                    name="form.password_confirmation" wire:model.defer="form.password_confirmation"
                     placeholder="{{ __('dashboard/users.form.password-confirmation.placeholder') }}" />
             @endif
 
-            <p class="text-info">{{ __('dashboard/users.create.form-info') }}</p>
+            <p class="text-info" style="text-align: justify">{{ __('dashboard/users.create.form-info') }}</p>
 
-            <div class="d-flex justify-content-end mt-3">
+            <div class="d-flex justify-content-end mt-3" wire:loading.attr="disabled">
                 <x-dashboard::ui.button type="submit">
-                    {{ __('dashboard/global.submit-btn') }}
+                    <div wire:loading>
+                        Loading...
+                    </div>
+                    <div wire:loading.remove>
+                        {{ __('dashboard/global.submit-btn') }}
+                    </div>
                 </x-dashboard::ui.button>
             </div>
 

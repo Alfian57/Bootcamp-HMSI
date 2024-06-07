@@ -1,12 +1,10 @@
-@section('title')
-    Dashbord
-@endsection
+@section('title', 'Dashbord')
 
 @push('scripts')
     <script src="{{ asset('assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
 @endpush
 
-<x-dashboard-layouts::main>
+<div>
     <x-dashboard::shared.page-container title="Dashboard">
         <div class="col-12">
             <div class="row">
@@ -21,4 +19,4 @@
             </div>
         </div>
     </x-dashboard::shared.page-container>
-</x-dashboard-layouts::main>
+</div>

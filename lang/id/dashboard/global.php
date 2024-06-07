@@ -5,8 +5,9 @@ return [
     'edit-btn' => 'Ubah',
     'submit-btn' => 'Kirim',
     'detail-btn' => 'Detail',
-    'download-excel-btn' => 'Unduh Excel',
-    'download-pdf-btn' => 'Unduh PDF',
+    'download-invoice-btn' => 'Unduh faktur',
+    'no-description' => 'Tidak ada deskripsi',
+    'import-data' => 'Impor data',
 
     'image-error' => 'Gambar rusak atau kosong',
     'delete-confirmation' => [

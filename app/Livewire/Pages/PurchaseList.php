@@ -8,6 +8,6 @@ class PurchaseList extends Component
 {
     public function render()
     {
-        return view('livewire.pages.purchase-list');
+        return view('dashboard.pages.purchase.index');
     }
 }

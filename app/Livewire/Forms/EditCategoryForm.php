@@ -18,7 +18,7 @@ class EditCategoryForm extends Form
         ];
     }
 
-    public function attributes(): array
+    public function validationAttributes(): array
     {
         return [
             'name' => __('dashboard/categories.form.name.attribute'),

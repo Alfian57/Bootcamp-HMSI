@@ -4,6 +4,7 @@ namespace App\Livewire\Tables;
 
 use App\Enums\PurchaceStatus;
 use App\Models\Purchase;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -32,7 +33,7 @@ class PurchasesTable extends DataTableComponent
                     'placeholder' => __('dashboard/purchases.datatable.filter.customer-name.placeholder'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('user.name', 'like', '%'.$value.'%');
+                    $builder->where('user.name', 'like', '%' . $value . '%');
                 }),
 
             SelectFilter::make(__('dashboard/purchases.datatable.filter.purchase-status.label'), 'purchase_status')
@@ -74,12 +75,12 @@ class PurchasesTable extends DataTableComponent
                 ->secondaryHeaderFilter('customer_name'),
 
             Column::make(__('dashboard/purchases.datatable.column.total-price'), 'total_price')
-                ->format(fn ($value) => 'Rp '.number_format($value, 2))
+                ->format(fn ($value) => 'Rp ' . number_format($value, 2))
                 ->sortable()
                 ->collapseOnTablet(),
 
             Column::make(__('dashboard/purchases.datatable.column.total-weight'), 'total_weight')
-                ->format(fn ($value) => $value.' kg')
+                ->format(fn ($value) => $value . ' kg')
                 ->sortable()
                 ->collapseOnTablet(),
 
@@ -95,30 +96,20 @@ class PurchasesTable extends DataTableComponent
 
             Column::make(__('dashboard/purchases.datatable.column.action'))
                 ->label(function ($row) {
-                    $detailButton = view('datatable.components.shared.button.action-button', [
-                        'href' => route('dashboard.purchases.show', $row->id),
-                        'class' => 'btn-primary',
-                        'text' => __('dashboard/global.detail-btn'),
-                        'navigate' => true,
-                    ]);
-
-                    $exportPdfButton = view('datatable.components.shared.button.action-button', [
-                        'href' => route('dashboard.purchases.export-pdf', $row->id),
-                        'class' => 'btn-info',
-                        'text' => __('dashboard/global.download-pdf-btn'),
-                    ]);
-
-                    $exportExcelButton = view('datatable.components.shared.button.action-button', [
-                        'href' => route('dashboard.purchases.export-excel', $row->id),
-                        'class' => 'btn-secondary',
-                        'text' => __('dashboard/global.download-excel-btn'),
-                    ]);
-
-                    return view('datatable.components.shared.action-container.index', [
-                        'components' => [$detailButton, $exportPdfButton, $exportExcelButton],
-                    ]);
+                    return view('datatable.components.shared.column.purchase-action-column', ['id' => $row->id]);
                 }),
         ];
+    }
+
+    public function downloadInvoice(string $id)
+    {
+        $purchase = Purchase::find($id);
+        $fileName = 'purchases_' . $purchase->user->name . '_' . date('Y-m-d_H-i-s') . '.pdf';
+        $pdf = Pdf::loadView('export.purchase-pdf', compact('purchase'));
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo  $pdf->stream();
+        }, $fileName);
     }
 
     private function displayStatus($value): string

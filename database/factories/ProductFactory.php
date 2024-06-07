@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             'category_id' => $this->faker->randomElement(Category::pluck('id')),
             'weight' => $this->faker->numberBetween(1, 100),
             'stock' => $this->faker->numberBetween(0, 100),
-            'image' => null,
+            'image' => 'products/'.$this->faker->file('storage/app/dummy/products', 'public/storage/products', false),
         ];
     }
 }

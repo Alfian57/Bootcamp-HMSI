@@ -2,7 +2,7 @@
     {{ __('dashboard/purchases.index.title') }}
 @endsection
 
-<x-dashboard-layouts::main>
+<div>
     <x-dashboard::shared.page-container title="{{ __('dashboard/purchases.index.page-title') }}">
         <div class="d-flex justify-content-end mb-5">
             <x-dashboard::ui.button href="{{ route('dashboard.purchases.create') }}" wire:navigate>
@@ -10,7 +10,8 @@
             </x-dashboard::ui.button>
         </div>
 
-        <livewire:purchases-table />
+        <livewire:modals.purchase.delete-purchase-modal />
+        <livewire:tables.purchases-table />
 
     </x-dashboard::shared.page-container>
-</x-dashboard-layouts::main>
+</div>

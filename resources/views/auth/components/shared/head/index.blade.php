@@ -14,6 +14,23 @@
     <link rel="stylesheet" href="{{ asset('assets/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/compiled/css/iconly.css') }}">
+    <style>
+        #auth-right-bg {
+            background-image: url('assets/static/images/bg/auth.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        #auth-right-filter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: .25;
+        }
+    </style>
+
 
     @livewireStyles
     @stack('styles')

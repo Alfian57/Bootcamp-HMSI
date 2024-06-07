@@ -22,8 +22,6 @@ class CreateUserForm extends Form
 
     public $phone_number = '';
 
-    public $photo_profile = '';
-
     public $is_active = true;
 
     public $is_admin = false;
@@ -37,13 +35,12 @@ class CreateUserForm extends Form
             'gender' => ['required', Rule::in(Gender::MALE->value, Gender::FEMALE->value)],
             'date_of_birth' => ['required', 'date'],
             'phone_number' => ['required', 'string', 'max:25'],
-            'photo_profile' => ['nullable', 'string'],
             'is_active' => ['required', 'boolean'],
             'is_admin' => ['required', 'boolean'],
         ];
     }
 
-    public function attributes(): array
+    public function validationAttributes(): array
     {
         return [
             'name' => __('dashboard/users.form.name.attribute'),
@@ -53,7 +50,6 @@ class CreateUserForm extends Form
             'gender' => __('dashboard/users.form.gender.attribute'),
             'date_of_birth' => __('dashboard/users.form.date-of-birth.attribute'),
             'phone_number' => __('dashboard/users.form.phone-number.attribute'),
-            'photo_profile' => __('dashboard/users.form.photo-profile.attribute'),
             'is_active' => __('dashboard/users.form.is-active.attribute'),
             'is_admin' => __('dashboard/users.form.is-admin.attribute'),
         ];

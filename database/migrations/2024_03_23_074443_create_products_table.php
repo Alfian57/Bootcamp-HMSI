@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('price');
             $table->foreignUuid('category_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->unsignedFloat('weight');

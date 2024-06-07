@@ -16,10 +16,8 @@
                     {{ $slot }}
                 </div>
             </div>
-            <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right">
-                    {{--  --}}
-                </div>
+            <div class="col-lg-7 d-none d-lg-block position-relative" id="auth-right-bg">
+                <div class="bg-primary" id="auth-right-filter"></div>
             </div>
         </div>
     </div>

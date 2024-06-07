@@ -45,37 +45,37 @@ return [
         'name' => [
             'label' => 'Product Name',
             'placeholder' => 'Enter the name',
-            'attribute' => 'Product name',
+            'attribute' => 'product name',
         ],
         'description' => [
             'label' => 'Description',
             'placeholder' => 'Enter the description',
-            'attribute' => 'Description',
+            'attribute' => 'description',
         ],
         'price' => [
             'label' => 'Price (Rp)',
             'placeholder' => 'Enter the price (Rp)',
-            'attribute' => 'Price',
+            'attribute' => 'price',
         ],
         'category' => [
             'label' => 'Category',
             'placeholder' => 'Select the category',
-            'attribute' => 'Category',
+            'attribute' => 'category',
         ],
         'weight' => [
             'label' => 'Weight (Kg)',
             'placeholder' => 'Enter the weight (Kg)',
-            'attribute' => 'Weight',
+            'attribute' => 'weight',
         ],
         'stock' => [
             'label' => 'Stock',
             'placeholder' => 'Enter the stock',
-            'attribute' => 'Stock',
+            'attribute' => 'stock',
         ],
         'image' => [
             'label' => 'Image',
             'placeholder' => 'Choose the image',
-            'attribute' => 'Image',
+            'attribute' => 'image',
         ],
         'empty-image' => [
             'label' => 'Empty Image',

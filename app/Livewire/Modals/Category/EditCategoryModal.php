@@ -4,6 +4,7 @@ namespace App\Livewire\Modals\Category;
 
 use App\Livewire\Forms\EditCategoryForm;
 use App\Models\Category;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class EditCategoryModal extends Component
@@ -12,8 +13,11 @@ class EditCategoryModal extends Component
 
     public Category $category;
 
-    public function mount(Category $category)
+    #[On('set-category-edit-modal')]
+    public function setCategory(string $id)
     {
+        $category = Category::find($id);
+
         $this->category = $category;
         $this->form->id = $category->id;
         $this->form->name = $category->name;
@@ -26,7 +30,8 @@ class EditCategoryModal extends Component
         $this->reset();
 
         toast(__('dashboard/categories.edit.success-message'), 'success');
-        $this->redirect(route('dashboard.categories.index'));
+
+        return $this->redirect(route('dashboard.categories.index'), true);
     }
 
     public function render()

@@ -7,7 +7,6 @@
 
 <body>
     @stack('body-init')
-    @include('sweetalert::alert')
 
     <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
 
@@ -23,7 +22,6 @@
     </div>
 
     <x-dashboard::shared.scripts />
-
     @livewireScripts
 </body>
 

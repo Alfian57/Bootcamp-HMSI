@@ -5,8 +5,9 @@ return [
     'edit-btn' => 'Edit',
     'submit-btn' => 'Submit',
     'detail-btn' => 'Detail',
-    'download-excel-btn' => 'Download Excel',
-    'download-pdf-btn' => 'Download PDF',
+    'download-invoice-btn' => 'Download invoice',
+    'no-description' => 'No description',
+    'import-data' => 'Import data',
 
     'image-error' => 'Image is corrupted or empty',
     'delete-confirmation' => [

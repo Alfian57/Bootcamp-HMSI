@@ -2,11 +2,9 @@
 
 namespace App\Livewire\Tables;
 
-use App\Exports\ProductsExport;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
@@ -55,7 +53,6 @@ class ProductsTable extends DataTableComponent
     {
         return [
             'deleteSelected' => __('dashboard/global.bulk-action.delete'),
-            'exportSelected' => __('dashboard/global.bulk-action.export-excel'),
         ];
     }
 
@@ -68,13 +65,6 @@ class ProductsTable extends DataTableComponent
         });
 
         Product::whereIn('id', $this->getSelected())->delete();
-    }
-
-    public function exportSelected()
-    {
-        $fileName = 'products_'.date('Y-m-d_H-i-s').'.xlsx';
-
-        return Excel::download(new ProductsExport($this->getSelected()), $fileName);
     }
 
     public function columns(): array
@@ -92,9 +82,13 @@ class ProductsTable extends DataTableComponent
                 ->collapseOnMobile(),
 
             ImageColumn::make(__('dashboard/products.datatable.column.image'), 'image')
-                ->location(
-                    fn ($row) => asset('storage/'.$row->image)
-                )
+                ->location(function ($row) {
+                    if ($row->image) {
+                        return asset('storage/'.$row->image);
+                    }
+
+                    return asset('assets/static/images/unknown.png');
+                })
                 ->attributes(fn ($row) => [
                     'class' => 'text-danger font-weight-bold',
                     'alt' => __('dashboard/global.image-error'),
@@ -110,13 +104,12 @@ class ProductsTable extends DataTableComponent
                 ->collapseAlways(),
 
             Column::make(__('dashboard/products.datatable.column.description'), 'description')
+                ->format(fn ($value) => $value ?? __('dashboard/global.no-description'))
                 ->collapseAlways(),
 
             Column::make(__('dashboard/products.datatable.column.action'))
                 ->label(function ($row) {
-                    $product = Product::where('id', $row->id)->firstOrFail();
-
-                    return view('datatable.components.shared.column.product-action-column', compact('product'));
+                    return view('datatable.components.shared.column.product-action-column', ['id' => $row->id]);
                 }),
         ];
     }

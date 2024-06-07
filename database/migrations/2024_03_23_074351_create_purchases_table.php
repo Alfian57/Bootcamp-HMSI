@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->time('purchase_time');
+            $table->time('purchase_time')->default(now());
             $table->unsignedBigInteger('total_price');
             $table->unsignedMediumInteger('total_weight');
             $table->enum('status', ['unpaid', 'paid', 'being shipped', 'completed', 'cancelled']);

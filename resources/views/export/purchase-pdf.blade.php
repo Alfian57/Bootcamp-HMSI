@@ -26,7 +26,24 @@
             margin-bottom: 20px;
         }
 
+        .invoice-header img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+
         .invoice-header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .company-details,
+        .customer-details {
+            margin-bottom: 20px;
+        }
+
+        .company-details p,
+        .customer-details p {
             margin: 0;
         }
 
@@ -53,6 +70,8 @@
 
         .invoice-summary h2 {
             margin: 0;
+            font-size: 20px;
+            color: #333;
         }
 
         .status {
@@ -60,6 +79,7 @@
             padding: 5px 10px;
             border-radius: 5px;
             color: #fff;
+            font-size: 14px;
         }
 
         .status.unpaid {
@@ -81,6 +101,13 @@
         .status.cancelled {
             background-color: #e74c3c;
         }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+        }
     </style>
 </head>
 
@@ -88,6 +115,19 @@
     <div class="invoice-container">
         <div class="invoice-header">
             <h1>Invoice</h1>
+        </div>
+        <div class="company-details">
+            <p><strong>Libur Ngoding</strong></p>
+            <p>1234 Street Address, City, Country</p>
+            <p>Email: bootcamp_hmsi@example.com</p>
+            <p>Phone: +1 234 567 890</p>
+        </div>
+        <div class="customer-details">
+            <p><strong>Customer Details</strong></p>
+            <p>{{ $purchase->user->name }}</p>
+            <p>{{ $purchase->user->address }}</p>
+            <p>Email: {{ $purchase->user->email }}</p>
+            <p>Phone: {{ $purchase->user->phone_number }}</p>
         </div>
         <div class="invoice-details">
             <table>
@@ -140,6 +180,10 @@
             <h2>Total: Rp {{ number_format($purchase->total_price, 2) }}</h2>
         </div>
     </div>
+    <footer>
+        <p>Thank you for your business!</p>
+        <p>If you have any questions, please contact us at bootcamp_hmsi@example.com or +1 234 567 890.</p>
+    </footer>
 </body>
 
 </html>

@@ -42,9 +42,9 @@ class CreateUserModal extends Component
             false => __('dashboard/users.form.is-active.items.inactive'),
         ];
 
-        $this->form->gender = $this->genders[Gender::MALE->value];
-        $this->form->is_admin = $this->roles[true];
-        $this->form->is_active = $this->activeOptions[true];
+        $this->form->gender = Gender::MALE->value;
+        $this->form->is_admin = true;
+        $this->form->is_active = true;
     }
 
     public function save()
@@ -52,11 +52,8 @@ class CreateUserModal extends Component
         $this->form->validate();
 
         $data = $this->form->all();
-        if ($this->form->photo_profile) {
-            // $data['photo_profile'] = $this->form->photo_profile->store('photo_profile');
-        }
-        if (! isset($data['password'])) {
-            $data['password'] = str::random(10);
+        if (! $this->showPassword) {
+            $data['password'] = Str::random(10);
         }
 
         $user = User::create($data);
@@ -66,9 +63,9 @@ class CreateUserModal extends Component
             $data['password'],
         ));
 
-        toast(__('dashboard/users.create.success-message'), 'success');
+        session()->flash('message', __('dashboard/users.create.success-message'));
 
-        return redirect()->route('dashboard.users.index');
+        return $this->redirect(route('dashboard.users.index'), true);
     }
 
     public function toggleShowPassword()

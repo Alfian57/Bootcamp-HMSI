@@ -46,6 +46,14 @@
 </div>
 <div class="page-content">
     <section class="row">
+        <div data-navigate-track>
+            @if (session()->has('message'))
+                <div class="alert alert-success alert-dismissible show fade">
+                    {{ session()->get('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
         {{ $slot }}
     </section>
 </div>

@@ -19,6 +19,7 @@ return [
         'form-info' => "Enter the image if you want to change it and leave it blank if you don't want to change",
     ],
     'delete' => [
+        'title' => 'Delete User',
         'success-message' => 'User successfully deleted',
     ],
     'datatable' => [

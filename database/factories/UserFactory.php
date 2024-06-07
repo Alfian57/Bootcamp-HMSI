@@ -20,11 +20,11 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => 'password', // password
+            'password' => 'password',
             'gender' => $this->faker->randomElement([Gender::MALE->value, Gender::FEMALE->value]),
             'date_of_birth' => $this->faker->date(max: '2005-01-01'),
             'phone_number' => $this->faker->numerify('############'),
-            'photo_profile' => null,
+            'photo_profile' => 'profiles/'.$this->faker->file('storage/app/dummy/profiles', 'public/storage/profiles', false),
             'is_active' => true,
             'is_admin' => $this->faker->boolean(),
             'last_login' => null,

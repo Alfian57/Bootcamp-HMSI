@@ -120,9 +120,13 @@ class UsersTable extends DataTableComponent
                 ->collapseOnMobile(),
 
             ImageColumn::make(__('dashboard/users.datatable.column.photo-profile'), 'photo_profile')
-                ->location(
-                    fn ($row) => asset('storage/'.$row->photo_profile)
-                )
+                ->location(function ($row) {
+                    if ($row->photo_profile) {
+                        return asset('storage/'.$row->photo_profile);
+                    }
+
+                    return asset('assets/static/images/avatar.jpg');
+                })
                 ->attributes(fn ($row) => [
                     'class' => 'text-danger font-weight-bold',
                     'alt' => __('dashboard/global.image-error'),
@@ -145,9 +149,7 @@ class UsersTable extends DataTableComponent
 
             Column::make(__('dashboard/users.datatable.column.action'))
                 ->label(function ($row) {
-                    $user = User::where('id', $row->id)->firstOrFail();
-
-                    return view('datatable.components.shared.column.user-action-column', compact('user'));
+                    return view('datatable.components.shared.column.user-action-column', ['id' => $row->id]);
                 }),
         ];
     }

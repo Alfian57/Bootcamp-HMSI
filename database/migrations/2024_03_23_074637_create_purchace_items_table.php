@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('purchase_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->unsignedSmallInteger('quantity');
             $table->unsignedInteger('total_price');
             $table->foreignUuid('purchase_id')->references('id')->on('purchases')->cascadeOnDelete();

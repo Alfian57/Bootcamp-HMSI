@@ -3,10 +3,13 @@
 @php
     $id = Str::uuid();
     $name = $attributes->get('name');
+    $required = $attributes->get('required') ?? false;
+
 @endphp
 
 <div class="form-group mb-3">
-    <label class="form-group-text" for="{{ $id }}">{{ $label }}</label>
+    <label class="form-group-text" for="{{ $id }}">{{ $label }} <span
+            class="text-danger">{{ $required ? '*' : '' }}</span></label>
 
     <select {{ $attributes->class('form-select ' . ($errors->has($name) ? ' is-invalid' : '')) }}
         id="{{ $id }}">

@@ -16,6 +16,10 @@ return [
         'page-title' => 'Edit Pembelian',
         'success-message' => 'Pembelian berhasil diperbarui',
     ],
+    'delete' => [
+        'title' => 'Hapus Pembelian',
+        'success-message' => 'Pembelian berhasil dihapus',
+    ],
     'datatable' => [
         'column' => [
             'customer-name' => 'Nama Pelanggan',
@@ -50,20 +54,24 @@ return [
     'form' => [
         'status' => [
             'label' => 'Status Pembelian',
-            'attribute' => 'Status Pembelian',
+            'attribute' => 'status pembelian',
+        ],
+        'user' => [
+            'label' => 'Nama Pembeli',
+            'attribute' => 'nama pembeli',
         ],
         'product' => [
             'label' => 'Nama Produk',
-            'attribute' => 'Nama Produk',
+            'attribute' => 'nama produk',
         ],
         'quantity' => [
             'label' => 'Jumlah',
             'placeholder' => 'Masukan jumlah',
-            'attribute' => 'Jumlah',
+            'attribute' => 'jumlah',
         ],
         'note' => [
             'label' => 'Catatan',
-            'attribute' => 'Catatan',
+            'attribute' => 'catatan',
         ],
         'add-item-button' => '+ Tambah Item',
     ],

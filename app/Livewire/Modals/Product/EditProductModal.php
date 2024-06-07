@@ -6,6 +6,8 @@ use App\Livewire\Forms\EditProductForm;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -21,10 +23,19 @@ class EditProductModal extends Component
 
     public bool $isEmptyImage = false;
 
-    public function mount(Product $product)
+    public bool $isImageNew = false;
+
+    public function mount()
     {
-        $this->product = $product;
         $this->categories = Category::pluck('name', 'id');
+    }
+
+    #[On('set-product-edit-modal')]
+    public function setProduct(string $id)
+    {
+        $product = Product::find($id);
+
+        $this->product = $product;
 
         $this->form->name = $product->name;
         $this->form->description = $product->description;
@@ -37,31 +48,45 @@ class EditProductModal extends Component
 
     public function edit()
     {
-        $this->validate();
-
         $data = $this->form->all();
-        if ($this->form->image) {
-            $this->product->deleteImage();
+
+        if ($this->isEmptyImage) {
+            $this->form->image = null;
+        }
+
+        if (! $this->isImageNew) {
+            unset($data['image']);
+        }
+
+        $this->form->validate();
+
+        if ($this->form->image && $this->product->image) {
+            Storage::delete($this->product->image);
+        }
+
+        if (! $this->isEmptyImage && $this->form->image) {
+            $data['image'] = $this->form->image->store('products');
         }
 
         if ($this->isEmptyImage) {
             $data['image'] = null;
-        } else {
-            $data['image'] = $this->form->image->store('products');
         }
-
         $this->product->update($data);
-
         $this->reset();
 
-        toast(__('dashboard/products.edit.success-message'), 'success');
+        session()->flash('message', __('dashboard/products.edit.success-message'));
 
-        return $this->redirect(route('dashboard.products.index'));
+        return $this->redirectRoute('dashboard.products.index', navigate: true);
     }
 
     public function toogleEmptyImage()
     {
         $this->isEmptyImage = ! $this->isEmptyImage;
+    }
+
+    public function toogleIsImageNew()
+    {
+        $this->isImageNew = true;
     }
 
     public function render()

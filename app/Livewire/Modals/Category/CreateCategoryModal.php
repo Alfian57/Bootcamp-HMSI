@@ -16,8 +16,9 @@ class CreateCategoryModal extends Component
         Category::create($this->form->all());
         $this->reset();
 
-        toast(__('dashboard/categories.create.success-message'), 'success');
-        $this->redirect(route('dashboard.categories.index'));
+        session()->flash('message', __('dashboard/categories.create.success-message'));
+
+        return $this->redirect(route('dashboard.categories.index'), true);
     }
 
     public function render()

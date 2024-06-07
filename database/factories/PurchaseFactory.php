@@ -28,7 +28,7 @@ class PurchaseFactory extends Factory
                 PurchaceStatus::COMPLETED->value,
                 PurchaceStatus::CANCELLED->value,
             ]),
-            'user_id' => $this->faker->randomElement(\App\Models\User::pluck('id')->where('is_admin', false)->toArray()),
+            'user_id' => $this->faker->randomElement(\App\Models\User::where('is_admin', false)->pluck('id')->toArray()),
         ];
     }
 

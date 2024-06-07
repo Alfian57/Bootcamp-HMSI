@@ -6,9 +6,14 @@
                 placeholder="{{ __('dashboard/categories.form.name.placeholder') }}" name="form.name"
                 wire:model.defer="form.name" required />
 
-            <div class="d-flex justify-content-end mt-3">
+            <div class="d-flex justify-content-end mt-3" wire:loading.attr="disabled">
                 <x-dashboard::ui.button type="submit">
-                    {{ __('dashboard/global.submit-btn') }}
+                    <div wire:loading>
+                        Loading...
+                    </div>
+                    <div wire:loading.remove>
+                        {{ __('dashboard/global.submit-btn') }}
+                    </div>
                 </x-dashboard::ui.button>
             </div>
         </form>

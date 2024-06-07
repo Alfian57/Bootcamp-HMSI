@@ -20,6 +20,7 @@ class CreateProductModal extends Component
     public function mount()
     {
         $this->categories = Category::pluck('name', 'id');
+        $this->categories->prepend(__('model.category'), null);
     }
 
     public function save()
@@ -33,9 +34,9 @@ class CreateProductModal extends Component
 
         $this->reset();
 
-        toast(__('dashboard/products.create.success-message'), 'success');
+        session()->flash('message', __('dashboard/products.create.success-message'));
 
-        return $this->redirect(route('dashboard.products.index'));
+        return $this->redirectRoute('dashboard.products.index', navigate: true);
     }
 
     public function render()

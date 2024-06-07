@@ -16,6 +16,10 @@ return [
         'page-title' => 'Edit Purchase',
         'success-message' => 'Purchase successfully updated',
     ],
+    'delete' => [
+        'title' => 'Delete Purchase',
+        'success-message' => 'Purchase successfully deleted',
+    ],
     'datatable' => [
         'column' => [
             'customer-name' => 'Customer Name',
@@ -50,20 +54,24 @@ return [
     'form' => [
         'status' => [
             'label' => 'Purchase Status',
-            'attribute' => 'Purchase Status',
+            'attribute' => 'purchase status',
+        ],
+        'user' => [
+            'label' => 'Buyer Name',
+            'attribute' => 'buyer name',
         ],
         'product' => [
             'label' => 'Product Name',
-            'attribute' => 'Product Name',
+            'attribute' => 'product name',
         ],
         'quantity' => [
             'label' => 'Quantity',
             'placeholder' => 'Enter the quantity',
-            'attribute' => 'Quantity',
+            'attribute' => 'quantity',
         ],
         'note' => [
             'label' => 'Note',
-            'attribute' => 'Note',
+            'attribute' => 'note',
         ],
         'add-item-button' => '+ Add Item',
     ],

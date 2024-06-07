@@ -33,6 +33,18 @@ class CategoriesTable extends DataTableComponent
         ];
     }
 
+    public function bulkActions(): array
+    {
+        return [
+            'deleteSelected' => __('dashboard/global.bulk-action.delete'),
+        ];
+    }
+
+    public function deleteSelected()
+    {
+        Category::whereIn('id', $this->getSelected())->delete();
+    }
+
     public function builder(): Builder
     {
         return Category::query()
@@ -47,9 +59,7 @@ class CategoriesTable extends DataTableComponent
 
             Column::make(__('dashboard/categories.datatable.column.action'))
                 ->label(function ($row) {
-                    $category = Category::where('id', $row->id)->firstOrFail();
-
-                    return view('datatable.components.shared.column.category-action-column', compact('category'));
+                    return view('datatable.components.shared.column.category-action-column', ['id' => $row->id]);
                 }),
         ];
     }

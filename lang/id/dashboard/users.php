@@ -19,6 +19,7 @@ return [
         'form-info' => 'Masukkan gambar jika ingin mengubahnya dan biarkan kosong jika tidak ingin mengubah',
     ],
     'delete' => [
+        'title' => 'Hapus pengguna',
         'success-message' => 'Pengguna berhasil dihapus',
     ],
     'datatable' => [
