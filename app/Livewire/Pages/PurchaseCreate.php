@@ -85,7 +85,6 @@ class PurchaseCreate extends Component
         $this->form->purchaseItems = array_values($this->form->purchaseItems);
     }
 
-
     public function render()
     {
         return view('dashboard.pages.purchase.create');

@@ -33,7 +33,7 @@ class PurchasesTable extends DataTableComponent
                     'placeholder' => __('dashboard/purchases.datatable.filter.customer-name.placeholder'),
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('user.name', 'like', '%' . $value . '%');
+                    $builder->where('user.name', 'like', '%'.$value.'%');
                 }),
 
             SelectFilter::make(__('dashboard/purchases.datatable.filter.purchase-status.label'), 'purchase_status')
@@ -75,12 +75,12 @@ class PurchasesTable extends DataTableComponent
                 ->secondaryHeaderFilter('customer_name'),
 
             Column::make(__('dashboard/purchases.datatable.column.total-price'), 'total_price')
-                ->format(fn ($value) => 'Rp ' . number_format($value, 2))
+                ->format(fn ($value) => 'Rp '.number_format($value, 2))
                 ->sortable()
                 ->collapseOnTablet(),
 
             Column::make(__('dashboard/purchases.datatable.column.total-weight'), 'total_weight')
-                ->format(fn ($value) => $value . ' kg')
+                ->format(fn ($value) => $value.' kg')
                 ->sortable()
                 ->collapseOnTablet(),
 
@@ -104,11 +104,11 @@ class PurchasesTable extends DataTableComponent
     public function downloadInvoice(string $id)
     {
         $purchase = Purchase::find($id);
-        $fileName = 'purchases_' . $purchase->user->name . '_' . date('Y-m-d_H-i-s') . '.pdf';
+        $fileName = 'purchases_'.$purchase->user->name.'_'.date('Y-m-d_H-i-s').'.pdf';
         $pdf = Pdf::loadView('export.purchase-pdf', compact('purchase'));
 
         return response()->streamDownload(function () use ($pdf) {
-            echo  $pdf->stream();
+            echo $pdf->stream();
         }, $fileName);
     }
 

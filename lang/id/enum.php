@@ -16,4 +16,8 @@ return [
         'male' => 'Laki-laki',
         'female' => 'Perempuan',
     ],
+    'role' => [
+        'admin' => 'Admin',
+        'buyer' => 'Pembeli',
+    ],
 ];

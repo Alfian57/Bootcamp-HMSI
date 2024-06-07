@@ -21,11 +21,15 @@
         <div class="dropdown" style="cursor: pointer">
             <div class="rounded-circle border d-flex justify-content-center align-items-center overflow-hidden"
                 style="width:50px;height:50px" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ asset('assets/compiled/jpg/1.jpg') }}" alt="Avatar" class="img-fluid">
+                @if (auth()->user()->photo_profile)
+                    <img src="{{ asset('storage/' . auth()->user()->photo_profile) }}" alt="Avatar" class="img-fluid">
+                @else
+                    <img src="{{ asset('assets/static/images/avatar.jpg') }}" alt="Avatar" class="img-fluid">
+                @endif
             </div>
             <ul class="dropdown-menu">
                 <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ route('dashboard.setting') }}">
                         {{ __('dashboard/navbar.settings') }}
                     </a>
                 </li>
@@ -50,6 +54,11 @@
             @if (session()->has('message'))
                 <div class="alert alert-success alert-dismissible show fade">
                     {{ session()->get('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @elseif (session()->has('error-message'))
+                <div class="alert alert-danger alert-dismissible show fade">
+                    {{ session()->get('error-message') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif

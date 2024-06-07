@@ -9,6 +9,7 @@ use App\Livewire\Pages\ProductList;
 use App\Livewire\Pages\PurchaseCreate;
 use App\Livewire\Pages\PurchaseEdit;
 use App\Livewire\Pages\PurchaseList;
+use App\Livewire\Pages\Setting;
 use App\Livewire\Pages\UserList;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->prefix('dashboard')->as('dashboard.')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/settings', Setting::class)->name('setting');
 
     Route::get('/index', Dashboard::class)->name('index');
 
