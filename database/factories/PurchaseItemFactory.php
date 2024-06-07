@@ -28,4 +28,14 @@ class PurchaseItemFactory extends Factory
             },
         ];
     }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (\App\Models\PurchaseItem $purchaseItem) {
+            $purchaseItem->purchase->update([
+                'total_price' => $purchaseItem->purchase->total_price + $purchaseItem->total_price * $purchaseItem->quantity,
+                'total_weight' => $purchaseItem->purchase->total_weight + $purchaseItem->product->weight * $purchaseItem->quantity,
+            ]);
+        });
+    }
 }

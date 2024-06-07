@@ -9,7 +9,7 @@ return [
         'column' => [
             'product-name' => 'Product Name',
             'price' => 'Price',
-            'quantity' => 'Kuantitas',
+            'quantity' => 'Quantity',
             'total-price' => 'Total Price',
             'note' => 'Note',
         ],

@@ -5,6 +5,7 @@ return [
         'title' => 'Pembelian',
         'page-title' => 'Daftar Pembelian',
         'create-button' => 'Tambah Pembelian',
+        'show-button' => 'Rincian',
     ],
     'create' => [
         'title' => 'Tambah Pembelian',

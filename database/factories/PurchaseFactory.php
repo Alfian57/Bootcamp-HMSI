@@ -19,8 +19,8 @@ class PurchaseFactory extends Factory
     {
         return [
             'purchase_time' => $this->faker->time(),
-            'total_price' => $this->faker->numberBetween(100000, 1000000),
-            'total_weight' => $this->faker->numberBetween(1, 10),
+            'total_price' => 0,
+            'total_weight' => 0,
             'status' => $this->faker->randomElement([
                 PurchaceStatus::UNPAID->value,
                 PurchaceStatus::PAID->value,
@@ -29,14 +29,16 @@ class PurchaseFactory extends Factory
                 PurchaceStatus::CANCELLED->value,
             ]),
             'user_id' => $this->faker->randomElement(\App\Models\User::where('is_admin', false)->pluck('id')->toArray()),
+            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 
     public function configure(): static
     {
         return $this->afterCreating(function (\App\Models\Purchase $purchase) {
-            \App\Models\PurchaseItem::factory()->count(rand(0, 10))->create([
+            \App\Models\PurchaseItem::factory()->count(rand(2, 10))->create([
                 'purchase_id' => $purchase->id,
+                'created_at' => $purchase->created_at,
             ]);
         });
     }

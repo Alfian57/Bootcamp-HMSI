@@ -7,6 +7,7 @@ use App\Livewire\Pages\CategoryList;
 use App\Livewire\Pages\Dashboard;
 use App\Livewire\Pages\ProductList;
 use App\Livewire\Pages\PurchaseCreate;
+use App\Livewire\Pages\PurchaseDetail;
 use App\Livewire\Pages\PurchaseEdit;
 use App\Livewire\Pages\PurchaseList;
 use App\Livewire\Pages\Setting;
@@ -41,4 +42,5 @@ Route::middleware('auth')->prefix('dashboard')->as('dashboard.')->group(function
     Route::get('purchases', PurchaseList::class)->name('purchases.index');
     Route::get('purchases/create', PurchaseCreate::class)->name('purchases.create');
     Route::get('purchases/{purchase}/edit', PurchaseEdit::class)->name('purchases.edit');
+    Route::get('purchases/{purchase}', PurchaseDetail::class)->name('purchases.show');
 });

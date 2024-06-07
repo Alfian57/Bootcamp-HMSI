@@ -5,6 +5,7 @@ return [
         'title' => 'Purchases',
         'page-title' => 'Purchase List',
         'create-button' => 'Create Purchase',
+        'show-button' => 'Detail',
     ],
     'create' => [
         'title' => 'Create Purchase',

@@ -32,6 +32,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->count(10)->create();
-        Purchase::factory()->count(10)->create();
+        Purchase::factory()->count(50)->create();
     }
 }

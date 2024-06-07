@@ -18,5 +18,11 @@
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
         rel="stylesheet" />
 
+    <style>
+        .badge {
+            color: black !important;
+        }
+    </style>
+
     @stack('styles')
 </head>
