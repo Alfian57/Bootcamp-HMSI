@@ -52,7 +52,7 @@ class CreateUserModal extends Component
         $this->form->validate();
 
         $data = $this->form->all();
-        if (! $this->showPassword) {
+        if (!$this->showPassword) {
             $data['password'] = Str::random(10);
         }
 
@@ -65,12 +65,12 @@ class CreateUserModal extends Component
 
         session()->flash('message', __('dashboard/users.create.success-message'));
 
-        return $this->redirect(route('dashboard.users.index'), true);
+        return $this->redirect(route('dashboard.users.index'));
     }
 
     public function toggleShowPassword()
     {
-        $this->showPassword = ! $this->showPassword;
+        $this->showPassword = !$this->showPassword;
     }
 
     public function render()

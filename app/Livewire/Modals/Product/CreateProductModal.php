@@ -36,7 +36,7 @@ class CreateProductModal extends Component
 
         session()->flash('message', __('dashboard/products.create.success-message'));
 
-        return $this->redirectRoute('dashboard.products.index', navigate: true);
+        return $this->redirectRoute('dashboard.products.index');
     }
 
     public function render()

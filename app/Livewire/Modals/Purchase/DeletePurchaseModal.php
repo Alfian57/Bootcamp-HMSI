@@ -22,7 +22,7 @@ class DeletePurchaseModal extends Component
 
         session()->flash('message', __('dashboard/purchases.delete.success-message'));
 
-        return $this->redirect(route('dashboard.purchases.index'), true);
+        return $this->redirect(route('dashboard.purchases.index'));
     }
 
     public function render()

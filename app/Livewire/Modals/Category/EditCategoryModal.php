@@ -31,7 +31,7 @@ class EditCategoryModal extends Component
 
         toast(__('dashboard/categories.edit.success-message'), 'success');
 
-        return $this->redirect(route('dashboard.categories.index'), true);
+        return $this->redirect(route('dashboard.categories.index'));
     }
 
     public function render()

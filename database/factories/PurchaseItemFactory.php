@@ -32,8 +32,11 @@ class PurchaseItemFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function (\App\Models\PurchaseItem $purchaseItem) {
+            $purchaseItem->update([
+                'total_price' => $purchaseItem->product->price * $purchaseItem->quantity,
+            ]);
             $purchaseItem->purchase->update([
-                'total_price' => $purchaseItem->purchase->total_price + $purchaseItem->total_price * $purchaseItem->quantity,
+                'total_price' => $purchaseItem->purchase->total_price + $purchaseItem->total_price,
                 'total_weight' => $purchaseItem->purchase->total_weight + $purchaseItem->product->weight * $purchaseItem->quantity,
             ]);
         });

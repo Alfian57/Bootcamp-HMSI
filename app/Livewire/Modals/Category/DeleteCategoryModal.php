@@ -21,7 +21,7 @@ class DeleteCategoryModal extends Component
         $this->category->delete();
         toast(__('dashboard/categories.delete.success-message'), 'success');
 
-        return $this->redirect(route('dashboard.categories.index'), true);
+        return $this->redirect(route('dashboard.categories.index'));
     }
 
     public function render()

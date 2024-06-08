@@ -29,7 +29,7 @@ class DeleteUserModal extends Component
 
         session()->flash('message', __('dashboard/users.delete.success-message'));
 
-        return $this->redirect(route('dashboard.users.index'), true);
+        return $this->redirect(route('dashboard.users.index'));
     }
 
     public function render()

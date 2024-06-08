@@ -18,7 +18,7 @@ class CreateCategoryModal extends Component
 
         session()->flash('message', __('dashboard/categories.create.success-message'));
 
-        return $this->redirect(route('dashboard.categories.index'), true);
+        return $this->redirect(route('dashboard.categories.index'));
     }
 
     public function render()

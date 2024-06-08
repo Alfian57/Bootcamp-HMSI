@@ -54,7 +54,7 @@ class EditProductModal extends Component
             $this->form->image = null;
         }
 
-        if (! $this->isImageNew) {
+        if (!$this->isImageNew) {
             unset($data['image']);
         }
 
@@ -64,7 +64,7 @@ class EditProductModal extends Component
             Storage::delete($this->product->image);
         }
 
-        if (! $this->isEmptyImage && $this->form->image) {
+        if (!$this->isEmptyImage && $this->form->image) {
             $data['image'] = $this->form->image->store('products');
         }
 
@@ -76,12 +76,12 @@ class EditProductModal extends Component
 
         session()->flash('message', __('dashboard/products.edit.success-message'));
 
-        return $this->redirectRoute('dashboard.products.index', navigate: true);
+        return $this->redirectRoute('dashboard.products.index');
     }
 
     public function toogleEmptyImage()
     {
-        $this->isEmptyImage = ! $this->isEmptyImage;
+        $this->isEmptyImage = !$this->isEmptyImage;
     }
 
     public function toogleIsImageNew()
