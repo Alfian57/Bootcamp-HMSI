@@ -17,7 +17,7 @@ class AuthController extends Controller
         $credentials = $request->validated();
 
         if (auth()->attempt($credentials)) {
-            if (! auth()->user()->is_active) {
+            if (!auth()->user()->is_active) {
                 toast('Akun tidak aktif', 'error');
 
                 return back()->withInput();

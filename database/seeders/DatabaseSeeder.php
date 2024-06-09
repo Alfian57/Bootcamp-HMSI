@@ -16,14 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $profilesImage = storage_path('/app/public/products');
-        foreach (File::files($profilesImage) as $file) {
-            File::delete($file);
+        if (File::exists(storage_path('/app/public/products'))) {
+            $productImage = storage_path('/app/public/products');
+            foreach (File::files($productImage) as $file) {
+                File::delete($file);
+            }
         }
 
-        $profilesImage = storage_path('/app/public/profiles');
-        foreach (File::files($profilesImage) as $file) {
-            File::delete($file);
+        if (File::exists(storage_path('/app/public/profiles'))) {
+            $profilesImage = storage_path('/app/public/profiles');
+            foreach (File::files($profilesImage) as $file) {
+                File::delete($file);
+            }
         }
 
         $this->call([

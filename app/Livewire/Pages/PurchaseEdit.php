@@ -77,7 +77,7 @@ class PurchaseEdit extends Component
 
         session()->flash('message', __('dashboard/purchases.edit.success-message'));
 
-        return $this->redirect(route('dashboard.purchases.index'), true);
+        return $this->redirect(route('dashboard.purchases.index'));
     }
 
     public function deleteItem($index)
