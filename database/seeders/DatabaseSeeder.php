@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             foreach (File::files($productImage) as $file) {
                 File::delete($file);
             }
+        } else {
+            File::makeDirectory(storage_path('/app/public/products'));
         }
 
         if (File::exists(storage_path('/app/public/profiles'))) {
@@ -28,6 +30,8 @@ class DatabaseSeeder extends Seeder
             foreach (File::files($profilesImage) as $file) {
                 File::delete($file);
             }
+        } else {
+            File::makeDirectory(storage_path('/app/public/profiles'));
         }
 
         $this->call([
